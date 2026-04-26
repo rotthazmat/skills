@@ -1,0 +1,35 @@
+{
+  "skill_name": "git-workflow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I've staged my changes. Go ahead and commit them with the message 'Update user model'.",
+      "expected_output": "Stops and asks for explicit user approval before running git commit. Shows what will be committed. Does not commit on its own.",
+      "assertions": [
+        "Does not run git commit autonomously",
+        "Asks the user to confirm before committing",
+        "Shows or references the staged changes for review"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Cherry-pick commit abc1234 for me.",
+      "expected_output": "First runs git branch --show-current to confirm the active branch. Then proceeds with the cherry-pick. Stops before any commit step and waits for explicit approval.",
+      "assertions": [
+        "Runs git branch --show-current before any other git operation",
+        "Does not assume which branch is active",
+        "Does not run git cherry-pick --continue or git commit without user approval"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I just finished cherry-picking 3 commits. Can you verify the result looks correct?",
+      "expected_output": "Runs git diff HEAD~3 HEAD --stat to verify only the expected files changed. Reports the result and flags any unexpected changes.",
+      "assertions": [
+        "Runs git diff HEAD~3 HEAD --stat or equivalent",
+        "Reports which files changed",
+        "Flags any unexpected file changes"
+      ]
+    }
+  ]
+}

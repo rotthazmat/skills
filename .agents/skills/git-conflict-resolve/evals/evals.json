@@ -1,0 +1,39 @@
+{
+  "skill_name": "git-conflict-resolve",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm cherry-picking commit abc1234 and have a conflict in src/Services/UserService.php. Walk me through resolving it.",
+      "expected_output": "Instructs to: (1) run git show abc1234 --stat to get the exact line-count summary, (2) run git show abc1234 -- src/Services/UserService.php to read every + and - line, (3) read the current HEAD state of the conflicted region, (4) apply only those +/- lines onto HEAD's structure without restructuring, (5) verify the staged diff count matches step 1, (6) stop and wait for user approval before running git cherry-pick --continue.",
+      "assertions": [
+        "Starts with git show <hash> --stat to get the line-count summary",
+        "Reads git show <hash> -- <file> as the authoritative source of changes",
+        "Explicitly warns against relying solely on conflict markers",
+        "Instructs to verify staged diff count matches the summary",
+        "Does not run git commit or git cherry-pick --continue autonomously"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "The conflict markers show a method in the incoming (>>>>>>>) side that already exists at a different line in the file. What should I do?",
+      "expected_output": "Discard the incoming side entirely — the method was relocated in HEAD, not removed. Do not duplicate it. Instead, find where it currently lives and apply only the specific +/- lines from the cherry-picked commit there.",
+      "assertions": [
+        "Advises discarding the incoming conflict side",
+        "Explains the method was moved, not removed",
+        "Warns against duplicating the existing method",
+        "Directs to apply the commit's changes where the method currently lives in HEAD"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I've resolved the conflict and staged the file. Can I run git cherry-pick --continue now?",
+      "expected_output": "Not yet — first run git diff --staged -- <file> and verify the line count matches what git show <hash> --stat reported. Only after confirming ask the user for explicit approval before continuing.",
+      "assertions": [
+        "Instructs to run git diff --staged to verify the diff count",
+        "Requires the count to match the original git show --stat summary",
+        "Does not run git cherry-pick --continue autonomously",
+        "Asks for user confirmation before proceeding"
+      ]
+    }
+  ]
+}
