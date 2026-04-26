@@ -1,11 +1,24 @@
 ---
 name: code-mcp
-description: MCP server scaffolding and code generation following SOLID principles, separation of concerns, and DRY patterns. Use when creating, extending, scaffolding, or reviewing Model Context Protocol servers in any supported language.
+description: MCP server scaffolding and code generation following SOLID principles, separation of concerns, and DRY patterns. Use when creating, extending, scaffolding, reviewing, auditing, checking, or polishing Model Context Protocol servers in any supported language.
 user-invocable: true
 argument-hint: "e.g. TypeScript MCP with weather tools"
 ---
 
 # MCP Server Creation
+
+---
+
+## Polishing / reviewing existing servers
+
+When the task is to polish, review, audit, or check an existing MCP server, **all steps below apply in full** — not just the ones that are obviously broken. Specifically:
+
+- **Restructure** the project to match the Step 2 layout even if it currently uses a flat or non-standard structure. Legacy flat layouts must be migrated.
+- **Apply all SOLID + DRY rules** from Step 3 regardless of how the original code was written.
+- **Add error handling** per Step 5 to every tool handler that lacks it.
+- **Add tests** per Step 6 — unit tests for `lib/` services and integration tests for tool handlers. Do not skip testing just because the original code had none.
+
+Do not treat polish as a cosmetic pass. The goal is to bring the server fully up to the standard a newly scaffolded server would meet.
 
 ---
 
