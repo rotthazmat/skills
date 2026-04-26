@@ -1,0 +1,31 @@
+{
+  "skill_name": "code-css",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review the SCSS file for style violations. List every issue you find.",
+      "expected_output": "Lists all violations: duplicate $primary variable, properties in .productCard not alphabetical (should be background, border-radius, color, display, padding), duplicate background property in .productCard, two ID selectors in one rule (#sidebar #logo), class .productCard uses lowercase instead of BEM PascalCase (should be .ProductCard).",
+      "files": ["evals/files/bad-styles.scss"],
+      "assertions": [
+        "Reports the duplicate $primary variable",
+        "Reports properties in .productCard are not alphabetical",
+        "Reports the duplicate background property in .productCard",
+        "Reports two ID selectors in the #sidebar #logo rule",
+        "Reports .productCard uses lowercase instead of BEM PascalCase (ProductCard)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a SCSS block for a card component with a header element and a featured modifier. Follow all code style rules.",
+      "expected_output": "Uses BEM: .Card as root, .Card-header as element, .Card--featured as modifier. All properties alphabetically ordered. No duplicate properties. 2-space indentation.",
+      "assertions": [
+        "Root class is PascalCase: .Card",
+        "Element uses single hyphen: .Card-header",
+        "Modifier uses double hyphens: .Card--featured",
+        "All CSS properties are in alphabetical order",
+        "No duplicate properties",
+        "Uses 2-space indentation"
+      ]
+    }
+  ]
+}
