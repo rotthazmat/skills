@@ -1,0 +1,52 @@
+{
+  "skill_name": "skill-author",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a new skill for reviewing Python code style — PEP 8, type hints, and naming conventions.",
+      "expected_output": "A skill directory with a valid SKILL.md: name matches directory, description includes 'Use when...' trigger clause, body covers only non-obvious Python-specific rules, a ## Resources section, and an evals/evals.json with at least 2 test cases.",
+      "assertions": [
+        "Skill name is lowercase with hyphens only (e.g. code-python)",
+        "Description includes a 'Use when...' clause with specific Python trigger keywords",
+        "SKILL.md body does not explain what PEP 8 is — jumps straight to the rules",
+        "A ## Resources section is present listing at least the evals file",
+        "evals/evals.json exists with at least 2 test cases",
+        "No company names or project-specific file paths in any file",
+        "No allowed-tools field in the frontmatter"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I want to create a skill called 'My Company Internal Tool'. Is that a good name? What should I change?",
+      "expected_output": "No — skill names must be lowercase with hyphens only, no spaces or uppercase. Company-specific names also make skills non-portable. Suggests a generic name based on what the tool does.",
+      "assertions": [
+        "Flags that the name contains spaces and uppercase — both invalid",
+        "Warns that company-specific names make the skill non-portable",
+        "Suggests a generic alternative based on the tool's function",
+        "Does not create any files until the name is agreed upon"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Audit the code-php skill and tell me what could be improved.",
+      "expected_output": "Checks the spec for updates first by fetching the agentskills.io URL, then reads SKILL.md and supporting files. Reports findings categorized by type: trigger reliability, content quality, progressive disclosure, missing evals, spec compliance.",
+      "assertions": [
+        "Fetches https://agentskills.io/llms.txt or the spec before auditing",
+        "Reads the existing SKILL.md and supporting files before suggesting changes",
+        "Categorizes findings (trigger, content, disclosure, evals, compliance)",
+        "Does not restructure content that is already working correctly",
+        "Does not apply changes without reporting findings first"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "The git-workflow skill description just says 'Git rules'. Improve it.",
+      "expected_output": "Rewrites only the description to include what the skill does and a 'Use when...' trigger clause with keywords like 'commit, cherry-pick, branch operation'. Does not change the SKILL.md body.",
+      "assertions": [
+        "New description is specific about what the skill enforces",
+        "Includes a 'Use when...' clause with specific operation keywords",
+        "Does not change anything in the SKILL.md body — only the description was the problem"
+      ]
+    }
+  ]
+}
