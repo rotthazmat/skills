@@ -1,0 +1,45 @@
+{
+  "skill_name": "best-practices",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to add retry logic, a cache layer, and a circuit breaker to this simple user fetch service. Is this a good idea?",
+      "expected_output": "No — these are features beyond the current task. Implement only what is asked for. Add them only if there is an explicit requirement.",
+      "assertions": [
+        "Advises against adding the unrequested features",
+        "References not designing for hypothetical future requirements",
+        "Does not implement any of the three features"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Should I wrap template rendering in try/catch in case the view file is missing?",
+      "expected_output": "No — a missing view file is a deployment error, not a runtime condition. Let it throw. Catching it hides misconfiguration.",
+      "assertions": [
+        "Advises against wrapping template rendering in try/catch",
+        "Explains that missing templates are deployment errors",
+        "Does not suggest adding a fallback or catch block"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "My controller passes the entire $user object to every template. Is there a problem with that?",
+      "expected_output": "Yes — pass only the variables a template actually uses. Passing the full object floods templates with unneeded data. Extract only the required properties.",
+      "assertions": [
+        "Identifies the anti-pattern of passing the full object",
+        "Recommends extracting only the properties the template uses",
+        "Does not rewrite code unless asked"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Should I add a comment above this foreach loop explaining what it does?",
+      "expected_output": "No — comments should only explain WHY, never WHAT. If the loop body uses well-named variables, the code is self-explanatory and needs no comment.",
+      "assertions": [
+        "Advises against adding a comment that describes what the code does",
+        "Explains that comments should explain the why, not the what",
+        "Does not add a comment"
+      ]
+    }
+  ]
+}
