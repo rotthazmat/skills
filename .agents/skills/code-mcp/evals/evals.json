@@ -1,0 +1,67 @@
+{
+  "evals": [
+    {
+      "id": "asks-language-before-coding",
+      "prompt": "Create an MCP server with a tool to fetch GitHub repository information.",
+      "expected": "The skill asks the user which language they prefer and shows the 9-language menu before generating any code.",
+      "assertions": [
+        "Response shows a numbered list of available languages (TypeScript, Python, C#, Go, Java, Rust, Swift, Ruby, PHP)",
+        "Response does NOT generate any code before the language is confirmed",
+        "Response mentions Tier 1 or highlights TypeScript as the default",
+        "Response asks what the server should expose (tools/resources/prompts)",
+        "Response does not assume TypeScript without asking"
+      ]
+    },
+    {
+      "id": "typescript-correct-structure",
+      "prompt": "Create a TypeScript MCP server with a tool to search GitHub repositories by keyword. Include tests.",
+      "expected": "Generates a properly structured TypeScript MCP project with separated concerns and both unit + integration tests.",
+      "assertions": [
+        "Generates src/index.ts as the entry point with no business logic",
+        "Generates src/tools/github.ts with a registerGithubTools(server) export",
+        "Generates src/lib/github-service.ts with pure business logic and zero MCP SDK imports",
+        "Generates src/lib/types.ts or co-locates Zod schemas — schemas are NOT duplicated",
+        "Generates tests/unit/lib/github-service.test.ts that tests the service with a mocked HttpClient",
+        "Generates tests/integration/tools/github.test.ts using InMemoryTransport",
+        "All tool handler errors are caught and returned as { isError: true } — no throws",
+        "package.json includes 'type': 'module' and vitest as dev dependency",
+        "Zod .describe() is present on every input schema field"
+      ]
+    },
+    {
+      "id": "python-server-with-tests",
+      "prompt": "I want to build a Python MCP server that connects to a PostgreSQL database and exposes a query tool.",
+      "expected": "Generates a Python MCP server with FastMCP, separated service layer, and pytest tests.",
+      "assertions": [
+        "Uses FastMCP, not a raw Server class",
+        "Business logic is in a separate lib/ module with no MCP imports",
+        "Tool registration is in a separate tools/ module",
+        "Tests use pytest and pytest-anyio",
+        "Unit tests mock the database client — no real DB connection required",
+        "Integration tests use create_connected_server_and_client_session or equivalent",
+        "Error handling returns structured error responses, not raised exceptions"
+      ]
+    },
+    {
+      "id": "no-console-log-gotcha",
+      "prompt": "Create a TypeScript MCP tool that logs debug information during execution.",
+      "expected": "Uses server.sendLoggingMessage() or stderr — never console.log — for debug output.",
+      "assertions": [
+        "Does not use console.log() in any tool handler",
+        "Uses server.sendLoggingMessage() or process.stderr.write() for debug output",
+        "Includes a comment or note explaining why console.log corrupts stdio transport"
+      ]
+    },
+    {
+      "id": "error-handling-no-throw",
+      "prompt": "Create a TypeScript MCP tool that calls an external API and handles failures.",
+      "expected": "Tool handler catches all errors and returns { isError: true } — never throws.",
+      "assertions": [
+        "Tool handler body is wrapped in try/catch",
+        "Catch block returns { isError: true, content: [{ type: 'text', text: message }] }",
+        "A shared handleToolError() utility is used or generated in lib/errors.ts",
+        "No throw statement exits the tool handler"
+      ]
+    }
+  ]
+}
