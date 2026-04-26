@@ -1,0 +1,38 @@
+{
+  "skill_name": "security",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review this PHP file for security vulnerabilities.",
+      "expected_output": "Reports: SQL injection in getUserById (unparameterized query), XSS in renderName (unescaped HTML output), eval() usage in runScript, missing try/catch in loadFromApi with no error handling and no stack trace protection.",
+      "files": ["evals/files/insecure.php"],
+      "assertions": [
+        "Reports SQL injection risk in getUserById",
+        "Reports XSS risk in renderName",
+        "Reports eval() usage in runScript",
+        "Reports unguarded external call in loadFromApi with no try/catch",
+        "Does not modify the file unless asked"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a PHP function that accepts a user-supplied search term and queries a database for matching products.",
+      "expected_output": "Uses a parameterized query (prepared statement) with a bound parameter. Does not interpolate the search term directly into the SQL string.",
+      "assertions": [
+        "Uses a prepared statement or parameterized query",
+        "Does not interpolate the user input directly into the SQL string",
+        "Wraps the query in try/catch returning null on failure"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Is it safe to render $comment directly inside an HTML paragraph like: echo '<p>' . $comment . '</p>'?",
+      "expected_output": "No — this is an XSS risk. The value must be escaped with htmlspecialchars($comment, ENT_QUOTES, 'UTF-8') before embedding it in HTML.",
+      "assertions": [
+        "Identifies the XSS risk",
+        "Recommends htmlspecialchars or equivalent escaping",
+        "Specifies the correct context (HTML body)"
+      ]
+    }
+  ]
+}

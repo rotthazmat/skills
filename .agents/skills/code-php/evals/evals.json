@@ -1,0 +1,47 @@
+{
+  "skill_name": "code-php",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review the PHP file for code style violations. List every issue you find.",
+      "expected_output": "Lists all violations: Yoda comparison, == instead of ===, array() instead of [], unsorted array keys (status/name/id should be id/name/status), unsorted use imports (Logger under Services should come after User under Models), missing parameter types, missing return types, 4-space indentation instead of 2, class not declared final, blank line before closing brace.",
+      "files": ["evals/files/bad-code.php"],
+      "assertions": [
+        "Reports the Yoda comparison: 'active' == $data['status']",
+        "Reports use of == instead of ===",
+        "Reports old array() syntax instead of []",
+        "Reports unsorted array keys (status, name, id — should be id, name, status)",
+        "Reports unsorted use imports (App\\Services\\Logger before App\\Models\\User)",
+        "Reports missing parameter types on process() and label()",
+        "Reports missing return types on both methods",
+        "Reports 4-space indentation instead of 2",
+        "Reports class not declared final",
+        "Does not modify the file unless explicitly asked"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review this PHP test file and identify any testing pattern issues.",
+      "expected_output": "Identifies the when/expect conflict: Functions\\when('get_option') in beforeEach will override Functions\\expect('get_option') in the second test, making that assertion never fire. Fix is to remove the when() from beforeEach and set it per test.",
+      "files": ["evals/files/bad-test.php"],
+      "assertions": [
+        "Identifies the when/expect conflict for get_option",
+        "Explains that the when() in beforeEach takes precedence over expect() in a specific test",
+        "Suggests removing the when() from beforeEach and placing it individually per test"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write a PHP service class that accepts a user ID (int) and an HTTP client, calls /users/{id}, and returns a User object or null on failure. Follow all code style rules.",
+      "expected_output": "A final class with a readonly-typed constructor, typed int parameter and ?User return type, error wrapped in try/catch returning null, 2-space indentation, single quotes.",
+      "assertions": [
+        "Class is declared final",
+        "Constructor uses readonly typed property for the HTTP client",
+        "Method has typed int parameter and ?User return type",
+        "Errors are caught in try/catch and return null",
+        "Uses 2-space indentation",
+        "Uses single quotes for string literals"
+      ]
+    }
+  ]
+}
