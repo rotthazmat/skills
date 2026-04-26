@@ -1,0 +1,32 @@
+{
+  "skill_name": "code-js",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review the JavaScript file for code style violations. List every issue you find.",
+      "expected_output": "Lists all violations: double quotes instead of single, missing semicolons, == instead of ===, != instead of !==, if blocks without curly braces, JSX props not alphabetically sorted (should be ariaLabel, className, role, userId).",
+      "files": ["evals/files/bad-code.js"],
+      "assertions": [
+        "Reports double quotes instead of single quotes",
+        "Reports missing semicolons",
+        "Reports == instead of === on the null check",
+        "Reports != instead of !== on the undefined check",
+        "Reports if statements missing curly braces",
+        "Reports JSX props not alphabetically sorted"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a TypeScript function that fetches a list of items from /api/items, filters for active ones, and returns them sorted by name. Follow all code style rules.",
+      "expected_output": "Uses single quotes, semicolons, ===, typed parameters and return type, curly braces on all control structures, 2-space indentation.",
+      "assertions": [
+        "Uses single quotes for string literals",
+        "Semicolons present at end of statements",
+        "Uses === for comparisons",
+        "Function has typed parameters and return type",
+        "All if/for/while blocks have curly braces",
+        "Uses 2-space indentation"
+      ]
+    }
+  ]
+}
