@@ -1,0 +1,84 @@
+{
+  "skill_name": "skill-toggle",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Disable the greeter skill.",
+      "expected_output": "Reads greeter/SKILL.md, confirms it is not already disabled, prepends 'Disabled. ' to the description, and reports success. No other content is changed.",
+      "assertions": [
+        "Reads the SKILL.md before editing",
+        "Prepends exactly 'Disabled. ' (capital D, period, space) to the description",
+        "Does not modify the skill body or any other field",
+        "Reports that the skill is now disabled"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Enable the greeter skill.",
+      "expected_output": "Reads greeter/SKILL.md, confirms it starts with 'Disabled. ', removes that prefix from the description, and reports success. No other content is changed.",
+      "assertions": [
+        "Reads the SKILL.md before editing",
+        "Removes exactly the leading 'Disabled. ' from the description",
+        "Does not modify the skill body or any other field",
+        "Reports that the skill is now enabled"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Disable the greeter skill (it is already disabled).",
+      "expected_output": "Reads greeter/SKILL.md, detects the description already starts with 'Disabled. ', and reports it is already disabled without making any changes.",
+      "assertions": [
+        "Reads the SKILL.md before acting",
+        "Detects the skill is already disabled",
+        "Makes no changes to the file",
+        "Reports the skill is already disabled"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Is the greeter skill currently enabled or disabled?",
+      "expected_output": "Reads greeter/SKILL.md, checks whether the description starts with 'Disabled. ', and reports the current state along with the description value.",
+      "assertions": [
+        "Reads the SKILL.md before answering",
+        "Correctly identifies enabled or disabled based on the 'Disabled. ' prefix",
+        "Shows the current description so the user can verify",
+        "Makes no changes to the file"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Enable a skill whose description reads: 'This skill is currently disabled. Use when reviewing CSS files.'",
+      "expected_output": "Detects the skill is implicitly disabled (no 'Disabled. ' prefix but description states it is disabled). Rewrites the description removing the disabled indication, resulting in something like 'Use when reviewing CSS files.' No other content is changed.",
+      "assertions": [
+        "Detects the implicit disabled state from the description text",
+        "Rewrites the description to remove the disabled language without asking the user",
+        "The resulting description no longer contains any indication the skill is disabled",
+        "Does not modify the skill body or any other field",
+        "Reports the new enabled description"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Check if a skill whose description reads: 'Not active. Handles database migrations.' is disabled.",
+      "expected_output": "Reads the SKILL.md, does not find the 'Disabled. ' prefix, but detects the description text implies the skill is disabled. Reports it as disabled via implicit description and shows the current description.",
+      "assertions": [
+        "Reads the SKILL.md before answering",
+        "Does not find the 'Disabled. ' prefix",
+        "Still correctly identifies the skill as disabled based on description text",
+        "Reports which detection method matched (implicit)",
+        "Makes no changes to the file"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Disable a skill that was just enabled from an implicit disabled state (description is now 'Handles database migrations.').",
+      "expected_output": "Prepends 'Disabled. ' to the description — does not restore any previous implicit wording. Result: 'Disabled. Handles database migrations.'",
+      "assertions": [
+        "Prepends exactly 'Disabled. ' to the current description",
+        "Does not attempt to restore any previous implicit disabled wording",
+        "Does not modify the skill body or any other field",
+        "Reports that the skill is now disabled"
+      ]
+    }
+  ]
+}
