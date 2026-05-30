@@ -1,0 +1,80 @@
+{
+  "skill_name": "research",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Investiga el fenómeno de la desinformación en redes sociales. Quiero entender cómo funciona, por qué se propaga y qué consecuencias tiene.",
+      "expected_output": "Análisis multidimensional que delimita el scope, mapea actores y variables clave (plataformas, algoritmos, usuarios, medios), revisa perspectivas académicas y empíricas, organiza por dimensiones (causal, estructural, empírica), identifica tensiones entre perspectivas, y cierra con un modelo integrador — no una lista de hechos.",
+      "assertions": [
+        "Define explícitamente el scope antes de desarrollar el análisis",
+        "Identifica al menos 3 dimensiones distintas (causal, estructural, empírica, histórica o interpretativa)",
+        "Contrasta al menos dos perspectivas o enfoques diferentes sobre el fenómeno",
+        "Señala tensiones o contradicciones entre fuentes o perspectivas",
+        "No se limita a resumir — construye una explicación propia integrando la evidencia",
+        "No presenta un inventario lineal de información sin relaciones entre elementos"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "¿Qué es la financiarización de la economía?",
+      "expected_output": "Primero delimita la pregunta (qué ángulo: histórico, estructural, crítico). Luego construye un mapa del tema con conceptos clave y actores. Desarrolla el análisis con dimensiones relevantes. Cierra integrando perspectivas — incluyendo visiones críticas, no solo la definición mainstream.",
+      "assertions": [
+        "Delimita o reformula la pregunta antes de responder",
+        "Incluye dimensión histórica (cómo surgió el fenómeno)",
+        "Incluye dimensión estructural (cómo opera actualmente)",
+        "Incorpora al menos una perspectiva crítica o alternativa a la visión dominante",
+        "No se detiene en una sola definición enciclopédica"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Necesito investigar la crisis del agua en el mundo. Sé lo más completo posible.",
+      "expected_output": "El skill debe resistir la trampa de 'ser lo más completo posible' como excusa para acumular sin sintetizar. Debe delimitar el scope, construir mapa del tema, organizar por dimensiones, triangular perspectivas (científica, política, económica, comunitaria), y producir un modelo integrador con tensiones explícitas — no una enciclopedia.",
+      "assertions": [
+        "Delimita explícitamente qué aspectos cubre y cuáles quedan fuera",
+        "Organiza la información en al menos 3 dimensiones claramente diferenciadas",
+        "Triangula perspectivas: al menos científica/técnica, política/institucional, y una perspectiva crítica o local",
+        "Identifica al menos una tensión o contradicción entre perspectivas",
+        "Cierra con un modelo o síntesis integradora, no con una lista de subtemas",
+        "No produce simplemente un índice temático extenso sin integración"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Tengo esta información sobre el cambio climático: 'Es causado principalmente por emisiones de CO2 provenientes de la quema de combustibles fósiles. Sus efectos incluyen aumento de temperatura, deshielo de glaciares y eventos extremos.' Complementa esto con lo que falta.",
+      "expected_output": "No repite lo que ya está. Identifica las dimensiones ausentes en el contexto previo (política, económica, social, histórica, soluciones, disputas) y las desarrolla con síntesis crítica. Organiza el complemento estructuradamente. Señala explícitamente qué gaps cubre.",
+      "assertions": [
+        "No repite la información ya proporcionada por el usuario",
+        "Identifica explícitamente qué dimensiones o ángulos faltan en el contexto original",
+        "Organiza el complemento en dimensiones claramente diferenciadas",
+        "Incluye al menos una perspectiva crítica o en tensión con la narrativa dominante",
+        "Cierra con una integración que conecta el contexto original con el complemento",
+        "No produce simplemente más datos del mismo tipo que ya había"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Ya hablamos de la Revolución Industrial. ¿Qué significa exactamente 'capitalismo de laissez-faire'?",
+      "expected_output": "Responde en modo aclaración conceptual — sin aplicar los 8 pasos completos. Define el término con contexto histórico relevante, lo conecta con lo ya discutido (Revolución Industrial), y señala brevemente por qué importa para entender el fenómeno mayor. No produce una investigación nueva completa.",
+      "assertions": [
+        "No aplica la estructura completa de 8 pasos a una pregunta de definición",
+        "Define el concepto con precisión y en contexto histórico",
+        "Conecta la definición con el tema previo del diálogo sin repetir lo ya discutido",
+        "La respuesta es proporcional a la pregunta — concisa, no un ensayo",
+        "No omite el contexto relevante bajo el pretexto de ser breve"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Investiga las causas de la pobreza en América Latina.",
+      "expected_output": "Antes de buscar, formula preguntas que guíen la búsqueda — no keywords. Ejemplo esperado: '¿qué estructuras históricas explican que la pobreza persista a pesar del crecimiento económico?', '¿por qué los ciclos de commodities no han reducido la pobreza estructural?'. Luego organiza por dimensiones, triangula perspectivas y cierra con síntesis jerárquica: resumen estructurado + modelo explicativo propio.",
+      "assertions": [
+        "Formula preguntas de investigación explícitas antes o durante el proceso — no solo keywords temáticos",
+        "Las preguntas formuladas apuntan a causalidad o tensión, no solo a descripción",
+        "Organiza la respuesta en al menos 2 capas: resumen por dimensión y modelo explicativo integrador",
+        "El modelo explicativo toma una posición — no es una lista neutral de causas",
+        "Triangula al menos dos perspectivas en tensión (ej. estructuralista vs. institucionalista)"
+      ]
+    }
+  ]
+}
