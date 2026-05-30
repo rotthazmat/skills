@@ -1,0 +1,40 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnp.*
+.yarn/cache/
+.yarn/unplugged/
+
+# PHP
+vendor/
+composer.lock
+
+# Build output
+dist/
+build/
+*.min.js
+*.min.css
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# Claude local settings (keep project settings)
+.claude/settings.local.json
+
+# 3rd party skills
+/.agents/skills/caveman/
+
