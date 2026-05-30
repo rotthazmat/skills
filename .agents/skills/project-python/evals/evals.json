@@ -1,0 +1,44 @@
+{
+  "skill_name": "project-python",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a Python project that reads CSV files from an input folder and writes a summary report to output/",
+      "expected_output": "Creates the full project scaffold: src/ with at least one module subfolder containing __init__.py and operations.py, index.py as a thin orchestrator with main(), test.py as a pytest wrapper, tests/conftest.py with tmp_path-based fixtures, tests/test_<module>.py with class-based tests covering positive and negative cases, venv setup via python3 -m venv, requirements.txt, .gitignore, CLAUDE.md, and README.md.",
+      "assertions": [
+        "Creates src/<module>/__init__.py and src/<module>/operations.py — business logic lives in operations.py, not index.py",
+        "index.py contains only a main() function that orchestrates calls to src modules — no business logic inline",
+        "test.py runs pytest via subprocess using venv/bin/pytest, not bare pytest",
+        "tests/conftest.py defines input_dir and output_dir fixtures using tmp_path",
+        "Tests include at least one negative case (e.g. missing file raises FileNotFoundError, or empty input returns empty list)",
+        "Setup instructions use python3 -m venv venv to create the venv, then python (not python3) after activation"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Refactor this Python script to follow best practices — it's one big file that reads images, converts them, and saves output all in one place",
+      "expected_output": "Splits the monolithic script into src/ modules by concern (e.g. scanner, converter), moves business logic out of any main-level code into operations.py files, creates index.py as orchestrator, adds type hints to all function signatures, replaces any string paths with pathlib.Path, and ensures modules receive paths as parameters rather than hardcoding them.",
+      "assertions": [
+        "Splits concerns into separate src/<module>/operations.py files — at minimum one module per distinct responsibility",
+        "index.py imports from src modules and only orchestrates — does not contain business logic",
+        "No module imports from index.py",
+        "All function signatures have type hints",
+        "pathlib.Path is used for all filesystem operations — no raw string paths passed between modules",
+        "Modules contain no print() calls or hardcoded paths — those stay in index.py"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Add tests for the scanner module that lists and sorts files from a folder",
+      "expected_output": "Creates or updates tests/conftest.py with input_dir fixture (using tmp_path) and a factory fixture for creating test files. Creates tests/test_scanner.py with a TestGetSortedFiles class (or equivalent) covering: sorted ascending output, empty folder returns empty list, non-matching files excluded, case-insensitive sort, missing folder raises FileNotFoundError, and file-as-folder raises NotADirectoryError.",
+      "assertions": [
+        "All fixtures use tmp_path — no hardcoded or real filesystem paths in tests",
+        "Tests are grouped in a class with one class per function under test",
+        "Covers the happy path: valid folder with files returns them sorted ascending case-insensitively",
+        "Covers at least two negative cases: missing folder raises FileNotFoundError, and either wrong type or empty input",
+        "Does not add duplicate tests — each test covers a scenario not already covered by another",
+        "venv/bin/pytest is used to run tests, not bare pytest"
+      ]
+    }
+  ]
+}
