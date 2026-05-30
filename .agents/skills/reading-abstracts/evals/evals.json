@@ -1,0 +1,43 @@
+{
+  "skill_name": "reading-abstracts",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Te paso este capítulo académico sobre economía andina. Hazme el resumen completo.",
+      "expected_output": "A full abstract (resumen-lectura format) with: complete bibliographic header, numbered sections following the argument's logic (not just chapter order), at least 2-3 blockquote quotes from the text, a concept glossary where every definition is anchored to how the term is used in the text — not its general meaning.",
+      "assertions": [
+        "Output includes a full bibliographic header with author, source, and original publication info",
+        "Sections are numbered and ordered by argumentative logic, not by the reading's table of contents",
+        "At least 2 blockquote quotes are included, verbatim from the provided text",
+        "A 'Conceptos Clave' table is present at the end with term definitions specific to this text",
+        "No external background information is added about authors, periods, or contexts not mentioned in the text",
+        "Each section states what the author is arguing, not just what the section is 'about'"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Ahora hazme la versión corta del mismo resumen.",
+      "expected_output": "A short abstract (resumen-corto format) with: one-line header, 3-5 sections max with plain-language section titles phrased as questions, bold on first mention of key terms, at most 2 quotes, and a glossary that is MORE complete than the full version — since the short format explains less inline.",
+      "assertions": [
+        "Header is a single line with author and source",
+        "Sections use plain-language question format (e.g., '¿Cómo funcionaba...?') not academic headings",
+        "Every key term is bolded on its first mention",
+        "The 'Conceptos para recordar' glossary contains at least as many terms as the full version's glossary",
+        "Explanations use accessible language — academic jargon is explained or substituted on first use",
+        "The short version is not a truncated copy of the full version — it recasts the argument"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "¿Qué dice la lectura sobre el rol de los mitmaq en la política del Estado Inca?",
+      "expected_output": "A focused answer that draws only from the provided reading, uses at least one direct quote or close paraphrase from the text, stays within the scope of what the text says, and signals clearly if the question goes beyond what the text covers.",
+      "assertions": [
+        "Answer is grounded exclusively in content from the provided reading",
+        "At least one blockquote or clearly attributed paraphrase from the text is included",
+        "If the question touches on something the text does not cover, the response explicitly signals that limit",
+        "No external historical context is added beyond what the text itself mentions",
+        "The answer maintains dimensional coherence with the section of the reading it draws from"
+      ]
+    }
+  ]
+}
