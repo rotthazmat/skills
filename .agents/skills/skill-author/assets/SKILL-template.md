@@ -3,9 +3,21 @@ name: skill-name
 description: One sentence on what this skill does. Use when the user asks about X, Y, or Z.
 # compatibility: Requires git        # uncomment if the skill needs specific tools
 # license: MIT                       # uncomment to declare a license
+# user-invocable: true               # uncomment to allow explicit /skill-name activation
+# argument-hint: "e.g. module name"  # uncomment to show a hint when user types /skill-name
 ---
 
 Brief one-paragraph summary of what this skill does and when it applies.
+
+## When to apply this skill
+
+Apply immediately and fully whenever the user:
+
+- [Trigger scenario 1 — be specific, include the exact words a user would type]
+- [Trigger scenario 2]
+- [Trigger scenario 3]
+
+Do not wait to be asked — enforce these conventions proactively on every matching task.
 
 ---
 
@@ -13,6 +25,14 @@ Brief one-paragraph summary of what this skill does and when it applies.
 
 [Core instructions. Write only what the model wouldn't know without this skill.
 Steps for workflows, rules for style/conventions, gotchas for non-obvious behavior.]
+
+### [Sub-section — universal]
+
+[Guidance that applies to every project using this skill.]
+
+### [Sub-section — project-specific — when X applies]
+
+[Guidance that only applies when the project has a specific requirement. Label clearly so agents don't apply it everywhere.]
 
 ---
 

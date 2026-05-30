@@ -1,7 +1,11 @@
 ---
 name: skill-author
-description: Create, improve, or audit Agent Skills. Use when asked to create, write, design, scaffold, upgrade, refactor, or review a skill in the .agents/skills/ directory.
+description: Create, improve, update, polish, or audit Agent Skills — regardless of where they live. Use when asked to create, write, design, scaffold, build, upgrade, refactor, improve, polish, update, or review ANY skill file (SKILL.md, references/, assets/, evals/). This skill is MANDATORY for any work on skills — do not create or modify skill files without invoking it first.
+user-invocable: true
+argument-hint: "optional: skill name or area to focus on"
 ---
+
+**This skill is mandatory for any work on Agent Skills — creating, improving, polishing, updating, auditing, or restructuring. Do not touch a skill file without following this process. No exceptions.**
 
 Use this skill for both creating new skills and improving existing ones. Follow the appropriate path below.
 
@@ -65,9 +69,25 @@ Write only what the model *wouldn't* know without this skill:
 | Folder | Use for | Load trigger |
 |---|---|---|
 | `references/` | Detailed docs, worked examples, scenario catalogs | On demand — agent loads when instructions say so |
-| `assets/` | Output templates, code templates, static resources | On demand — agent uses when task requires it |
+| `assets/` | Starter templates, boilerplate code, static resources | On demand — agent uses when task requires it |
 | `scripts/` | Reusable executable code the agent runs | Referenced by name in SKILL.md |
 | `evals/` | Test cases in `evals.json` — always add these | Tooling and iteration |
+
+**When to split `references/` into multiple files:** one file per distinct topic that would only be needed in some scenarios. Example: `testing.md`, `migration.md`, and `patterns.md` are all separate because a refactoring task needs migration + patterns but not testing, while a test-writing task needs testing but not migration. A single `references/all.md` bloats every context load.
+
+**When to create files in `assets/`:** whenever the skill involves creating something from scratch that has a recurring shape — entry points, config files, test suites, class stubs. Name them descriptively (`entry-point.js`, `base-class.php`, `test-suite.ts`). A good asset is a file the agent would otherwise write from scratch every time and get slightly wrong each time.
+
+**When to create files in `scripts/`:** when you notice the agent independently reinventing the same logic across runs — parsing a specific format, validating output, generating a report. Write a tested script once and bundle it. If an agent never needs to run code autonomously for this skill, skip `scripts/` entirely.
+
+**Universal vs project-specific:** when a rule applies only to some projects (not all), label it explicitly. This prevents agents from applying optional rules everywhere:
+
+```markdown
+### Config file (project-specific — only when the tool needs persistent settings)
+Use `assets/config-template.json` when the project stores user preferences...
+
+### Error logging (universal — add to every project that runs unattended)
+Wire `src/logger` when the project runs in batch mode or without a live terminal...
+```
 
 Add a `## Resources` section at the end of SKILL.md with a load trigger for each file:
 
@@ -75,7 +95,7 @@ Add a `## Resources` section at the end of SKILL.md with a load trigger for each
 ## Resources
 
 - **`references/scenarios.md`** — worked examples. Load when a scenario is unclear.
-- **`assets/template.php`** — base class template. Use when creating a new class.
+- **`assets/base-class.php`** — base class template. Use when creating a new class.
 - **`scripts/validate.sh`** — runs validation. Referenced in Step 3 of the workflow.
 - **`evals/evals.json`** — test cases.
 ```
@@ -86,15 +106,30 @@ Every skill must have `evals/evals.json`. Start with 2–3 cases. See `reference
 
 Minimum per eval case: a realistic prompt, a human-readable expected output, and 3–6 specific verifiable assertions.
 
+### Step 6b — Blind spot audit (do this before Step 7)
+
+Before locking in the skill, ask: "What scenarios does this skill NOT cover?" Work through it systematically:
+
+1. List every type of task this skill's users will do
+2. For each task, ask: does SKILL.md give enough to handle it correctly?
+3. If no — add it to SKILL.md, a `references/` file, or an `assets/` template
+4. Mark each piece of guidance as **universal** (every project) or **project-specific** (conditional)
+
+A skill with no blind spots is one where you can hand it to an agent with zero prior context and it will make no surprising decisions.
+
 ### Step 7 — Final checklist
 
 - [ ] Skill name matches the directory name
 - [ ] Description has a "Use when..." clause with specific trigger keywords
+- [ ] SKILL.md body has a "When to apply this skill" section listing all trigger scenarios explicitly
 - [ ] SKILL.md is under 500 lines
 - [ ] No company names, project-specific file paths, or internal references
 - [ ] Every supporting file listed in `## Resources` with a load trigger
 - [ ] `evals/evals.json` exists with at least 2 test cases
-- [ ] No `allowed-tools` field — not supported in VS Code's agent runtime
+- [ ] `allowed-tools` removed if targeting VS Code — not supported there (valid per spec for other runtimes)
+- [ ] File references stay one level deep from SKILL.md — no deeply nested reference chains
+- [ ] Universal vs project-specific guidance is labeled where applicable
+- [ ] Blind spot audit completed (Step 6b)
 
 ---
 
@@ -116,14 +151,27 @@ Identify pages relevant to what you're improving (evals, scripts, descriptions, 
 
 Read `SKILL.md` and all supporting files. Check against:
 
-- [ ] Description has a "Use when..." trigger clause
+- [ ] Description has a "Use when..." trigger clause with specific domain keywords
+- [ ] Body has a "When to apply this skill" section listing all trigger scenarios explicitly
 - [ ] Body covers only non-obvious content — no generic advice
 - [ ] SKILL.md is under 500 lines; excess detail belongs in `references/`
 - [ ] `## Resources` section exists and lists all supporting files with load triggers
 - [ ] `evals/evals.json` exists with realistic prompts and verifiable assertions
-- [ ] No `allowed-tools` in frontmatter (VS Code incompatible)
+- [ ] `allowed-tools` removed if targeting VS Code — not supported there (valid per spec for other runtimes)
+- [ ] File references stay one level deep — no deeply nested chains
 - [ ] No company names, internal paths, or project-specific references
 - [ ] Scripts (if any) have `--help`, no interactive prompts, structured stdout output
+- [ ] Universal vs project-specific guidance is labeled where applicable
+
+### Step 2b — Blind spot audit
+
+List every type of task the skill's users will do. For each, ask: does SKILL.md give enough to handle it without surprising decisions? Common blind spots to check:
+
+- Scenarios that are universal (every project) vs project-specific (conditional) — are they labeled?
+- Edge cases that aren't covered by any existing rule
+- Missing `assets/` templates for recurring boilerplate the agent writes from scratch each time
+- Missing `references/` files for scenarios that need detailed worked examples
+- Rules that assume context the agent won't have (e.g., assumes a specific file exists, a framework is installed, etc.)
 
 ### Step 3 — Identify improvements
 
@@ -131,15 +179,16 @@ Categorize findings:
 
 | Type | Examples |
 |---|---|
-| **Trigger reliability** | Vague description, missing "Use when...", no domain keywords |
+| **Trigger reliability** | Vague description, missing "Use when...", no domain keywords, no "When to apply" section |
 | **Content quality** | Generic advice, missing gotchas, procedures not reusable |
-| **Progressive disclosure** | SKILL.md over 500 lines, detail not moved to `references/` |
+| **Blind spots** | Uncovered scenarios, missing universal/project-specific labels, missing assets templates |
+| **Progressive disclosure** | SKILL.md over 500 lines, detail not moved to `references/`, references not split by topic |
 | **Missing evals** | No evals.json, weak assertions, no edge case coverage |
 | **Spec compliance** | Unsupported frontmatter fields, missing `## Resources` |
 
 ### Step 4 — Apply changes
 
-Make only the improvements identified in Step 3. Do not restructure content that works. Do not add features the skill doesn't need.
+Make only the improvements identified in Steps 2 and 2b. Do not restructure content that works. Do not add features the skill doesn't need.
 
 ---
 

@@ -122,6 +122,76 @@ exit 1
 
 ---
 
+---
+
+## Universal vs project-specific guidance
+
+When a skill's rules only apply to some projects, label them explicitly so agents don't apply optional rules everywhere:
+
+```markdown
+### Error logging (universal — add to every project that runs unattended)
+
+Wire a logger whenever the project processes batches or runs without a live terminal.
+
+### Config file (project-specific — only when the tool needs persistent user settings)
+
+Use `assets/config-template.json` when the user needs to persist preferences between runs.
+```
+
+**Formula for the label:** `(universal | project-specific) — [one-line condition]`
+
+Rules:
+- **Universal**: applies to every project using this skill without exception
+- **Project-specific**: applies only when a stated condition is true — state the condition, don't just say "optional"
+- When in doubt, make it project-specific and state the condition — better to under-prescribe than silently impose
+
+---
+
+## References file strategy
+
+One `references/` file per distinct topic that would only be needed in some scenarios. Ask: "Would a user doing task A need to load this to do task B?" If no — split them.
+
+```
+references/
+  testing.md      — needed only when writing tests
+  migration.md    — needed only when migrating existing code
+  patterns.md     — needed only when applying design patterns
+```
+
+A single `references/all.md` means every task loads everything — kills progressive disclosure.
+
+**Load trigger precision matters:**
+
+```markdown
+// Good — model knows exactly when to load it
+- **`references/migration.md`** — step-by-step migration guide. Load when refactoring an existing project.
+
+// Bad — model loads it every time (or never)
+- **`references/migration.md`** — more details.
+```
+
+---
+
+## Assets as starter templates
+
+Create an `assets/` file for every recurring "starting point" the skill involves — files the agent would otherwise write from scratch every time, getting details slightly wrong each time.
+
+**When to create an asset:**
+- The skill always produces files of a specific shape (entry point, test suite, config, class stub)
+- The agent would need to infer the correct boilerplate from the skill rules — risking subtle errors
+- There are multiple valid variants of the same file (e.g. `entry-point.js` vs `entry-point-cli.js`)
+
+**Naming:** descriptive, not generic. `base-controller.php` beats `template.php`. `test-suite.ts` beats `tests.ts`.
+
+**Load trigger:** reference each asset in `## Resources` with a conditional trigger — not "use if needed" but "use when creating X":
+
+```markdown
+- **`assets/entry-point.js`** — standard entry point template. Use when creating the main module.
+- **`assets/entry-point-cli.js`** — CLI variant with argument parsing. Use instead of `assets/entry-point.js` when the tool needs command-line flags.
+```
+
+---
+
 ## Naming and confidentiality
 
 - No company names, internal domain names, or project-specific file paths
