@@ -1,0 +1,131 @@
+{
+  "evals": [
+    {
+      "id": "en-buzzword-heavy",
+      "description": "English paragraph dense with AI buzzwords and formulaic structure",
+      "input": "Rewrite this to sound human: 'In today's fast-paced digital landscape, it is more important than ever to leverage cutting-edge technologies to foster innovation and empower organizations to navigate the complexities of a rapidly evolving marketplace. Furthermore, a robust and comprehensive approach is paramount. Moreover, by delving into the nuanced aspects of these multifaceted challenges, stakeholders can unlock their full potential and achieve transformative outcomes.'",
+      "expected_behavior": "Remove all flagged buzzwords (leverage, cutting-edge, foster, empower, navigate, robust, comprehensive, delving, nuanced, multifaceted, unlock, transformative). Remove formulaic opener and transition words (Furthermore, Moreover). Vary sentence length. Produce concrete, direct prose with a specific voice.",
+      "assertions": [
+        "No instances of: leverage, cutting-edge, foster, empower, navigate complexities, robust, comprehensive, delve/delving, nuanced, multifaceted, unlock, transformative",
+        "No 'In today's fast-paced' or equivalent clichéd opener",
+        "No 'Furthermore,' or 'Moreover,' as sentence starters",
+        "Sentence lengths visibly vary (at least one short sentence and one longer one)",
+        "The rewrite makes a concrete, specific claim rather than a generic one",
+        "Output does not introduce new AI buzzwords as replacements"
+      ]
+    },
+    {
+      "id": "es-formulaic-essay",
+      "description": "Spanish academic paragraph with AI structural tells",
+      "input": "Humaniza este texto: 'En el mundo actual, cabe destacar que la educación juega un papel fundamental en el desarrollo de la sociedad. Es importante mencionar que, en este sentido, los docentes desempeñan un rol esencial. Asimismo, resulta preciso señalar que la innovación educativa es clave para garantizar una formación integral. En conclusión, podemos observar que el compromiso de todos los actores involucrados es imprescindible para lograr una transformación significativa del sistema educativo.'",
+      "expected_behavior": "Remove: 'En el mundo actual', 'cabe destacar', 'Es importante mencionar', 'en este sentido', 'Asimismo', 'resulta preciso señalar', 'clave', 'integral', 'En conclusión', 'podemos observar', 'imprescindible', 'transformación significativa'. Replace impersonal constructions with active, personal voice. Vary paragraph structure.",
+      "assertions": [
+        "No 'En el mundo actual' or equivalent clichéd opener",
+        "No 'cabe destacar', 'cabe señalar', 'cabe mencionar'",
+        "No 'Es importante mencionar / destacar / señalar'",
+        "No 'En conclusión' or 'A modo de conclusión' closer",
+        "No 'Asimismo' used as a mechanical connector",
+        "At least one active first-person or direct construction replacing an impersonal one",
+        "No new AI-style filler introduced in the rewrite"
+      ]
+    },
+    {
+      "id": "en-emotional-flatness",
+      "description": "English text that describes emotions from outside rather than expressing them",
+      "input": "Rewrite to sound more human and emotionally real: 'The experience of losing a job can be quite challenging and emotionally taxing for the individual involved. Many people may find it difficult to cope with the uncertainty and potential financial stress that this situation can entail. It is important to acknowledge that these feelings are valid and that support is available.'",
+      "expected_behavior": "Replace outside-observer emotional description with embodied, specific, first-person or close third-person expression. Remove hedge clusters (can be, may find, can entail). Replace generic 'many people' with a specific perspective. Cut the disclaimer-style closer.",
+      "assertions": [
+        "Emotions are shown through specific detail or action, not described clinically",
+        "Hedge cluster removed or reduced to a single hedge maximum",
+        "No 'It is important to acknowledge' or similar formulaic validation phrase",
+        "No 'many people may find' or equivalent generic subject",
+        "The rewrite takes a point of view — not falsely balanced",
+        "Sentence length varies from the original's uniform structure"
+      ]
+    },
+    {
+      "id": "es-humanize-formal",
+      "description": "Spanish formal text that should be humanized without losing register",
+      "input": "Humaniza este texto manteniendo el registro formal: 'Se puede observar que la implementación de las nuevas políticas de recursos humanos ha generado cierto nivel de incertidumbre entre los empleados. En este contexto, resulta fundamental que la dirección adopte un enfoque integral para abordar la problemática y garantizar una transición adecuada. Es preciso destacar que la comunicación transparente constituye un elemento clave en este proceso.'",
+      "expected_behavior": "Replace impersonal constructions (se puede observar, resulta fundamental, es preciso destacar) with active constructions. Remove buzzwords (integral, abordar la problemática, clave). Maintain formal register — do not introduce colloquialisms. Vary sentence length.",
+      "assertions": [
+        "No 'se puede observar' or 'se puede afirmar' — replaced with active voice",
+        "No 'resulta fundamental' / 'es preciso destacar' filler",
+        "No 'abordar la problemática' compound",
+        "No 'enfoque integral' or 'elemento clave'",
+        "Formal register preserved — no inappropriate colloquialisms introduced",
+        "Rewrite demonstrates at least one structural variation from the original"
+      ]
+    },
+    {
+      "id": "en-diagnosis-only",
+      "description": "User asks to diagnose AI patterns without rewriting",
+      "input": "Identify all AI writing patterns in this text (don't rewrite): 'Moreover, it is worth noting that this comprehensive framework leverages cutting-edge methodologies to foster a culture of innovation. Furthermore, the multifaceted nature of these challenges underscores the need for a robust and transformative approach.'",
+      "expected_behavior": "List all identified patterns clearly by category: buzzwords, transition words, structural tells, tone. Do not rewrite the text.",
+      "assertions": [
+        "Identifies: Moreover, Furthermore as mechanical transition starters",
+        "Identifies: comprehensive, leverages, cutting-edge, foster, multifaceted, robust, transformative as buzzwords",
+        "Identifies: 'it is worth noting that' as formulaic filler",
+        "Identifies: 'underscores the need for' as AI structural phrasing",
+        "Does NOT rewrite the text — only diagnoses",
+        "Output is organized by category or clearly labeled per pattern"
+      ]
+    },
+    {
+      "id": "en-is-are-inflation",
+      "description": "English text with 'is/are' avoidance, negative parallelisms, and wordcount inflation",
+      "input": "Rewrite to sound human: 'It's not just about efficiency, it's about transformation. This methodology serves as a cornerstone of modern development and represents a paradigm shift in how organizations operate. It is worth noting that the approach marks a pivotal moment in the industry, demonstrating a robust commitment to innovation and showcasing the team's remarkable dedication to excellence.'",
+      "expected_behavior": "Flatten 'serves as/represents' back to plain 'is'. Break the 'not X, it's Y' parallelism into a direct claim. Cut the appended '-ing' clauses. Remove buzzwords (paradigm shift, pivotal, robust, showcasing, remarkable). Trim wordcount inflation. The result should be roughly half the original length with the same core claim.",
+      "assertions": [
+        "No 'serves as', 'stands as', 'marks', 'represents' replacing plain 'is/are'",
+        "No 'It's not X, it's Y' or equivalent negative parallelism",
+        "No 'paradigm shift', 'pivotal', 'robust', 'showcasing', 'remarkable'",
+        "No appended '-ing' clause padding at sentence ends",
+        "Result is noticeably shorter than the original (wordcount inflation removed)",
+        "The core claim is stated directly and clearly"
+      ]
+    },
+    {
+      "id": "es-vague-authority-specificity",
+      "description": "Spanish text relying on vague authority and significance overemphasis",
+      "input": "Humaniza este texto: 'Los estudios demuestran que la inteligencia artificial está transformando el mundo laboral de manera significativa. Los expertos señalan que este cambio representa un momento decisivo en la historia de la humanidad. Los analistas coinciden en que las organizaciones deben adoptar un enfoque integral para abordar esta problemática y garantizar su relevancia en un contexto en constante evolución.'",
+      "expected_behavior": "Replace 'los estudios demuestran' and 'los expertos señalan' with either a specific named source or a direct first-person claim. Remove significance overemphasis ('momento decisivo en la historia de la humanidad'). Remove 'enfoque integral', 'abordar la problemática', 'en constante evolución'. Replace impersonal constructions with active voice.",
+      "assertions": [
+        "No 'los estudios demuestran', 'los expertos señalan', 'los analistas coinciden' without a named source",
+        "No 'momento decisivo' / 'marca un hito' significance overemphasis",
+        "No 'enfoque integral' or 'abordar la problemática'",
+        "No 'en constante evolución' as trailing filler",
+        "The claim is owned directly — either attributed to a named source or stated in first person",
+        "Active constructions replace impersonal ones"
+      ]
+    },
+    {
+      "id": "en-source-consistency",
+      "description": "English text with an overreaching conclusion that outstrips its evidence, plus an internal contradiction",
+      "input": "Review and fix the consistency issues in this text: 'A survey of 45 marketing professionals found that 60% preferred short-form video content for brand awareness campaigns. This conclusively proves that short-form video is the dominant and superior format for all digital marketing across every industry and audience demographic. Furthermore, while the survey shows video is preferred, written content remains the most effective format for audience engagement, making it the clear choice for marketers.'",
+      "expected_behavior": "Identify and fix two problems: (1) the conclusion ('conclusively proves... all digital marketing... every industry') overreaches a 45-person survey limited to brand awareness; scale it down to match the evidence. (2) the final sentence contradicts the previous claim — flag and resolve the contradiction instead of letting both stand.",
+      "assertions": [
+        "The conclusion is scaled down to match the scope of the evidence (45 marketing professionals, brand awareness only)",
+        "No 'conclusively proves' or equivalent absolute claim from narrow evidence",
+        "No 'all digital marketing' or 'every industry and audience demographic' overgeneralization",
+        "The internal contradiction between 'video is preferred' and 'written content is most effective' is identified and resolved — not left standing",
+        "The fix resolves the contradiction by choosing one defensible claim or explicitly scoping each claim, not by adding new unsupported evidence",
+        "The language of the surviving claims is proportional to what the survey actually supports"
+      ]
+    },
+    {
+      "id": "es-scratch-human-voice",
+      "description": "User asks to write from scratch in a human voice in Spanish",
+      "input": "Escríbeme un párrafo corto sobre por qué es difícil mantener el hábito de leer. Que suene humano, no como IA.",
+      "expected_behavior": "Produce a paragraph with a specific personal or observational angle, varied sentence rhythm, no AI buzzwords or formulaic openers, no generic 'many people' subject, no hedge clusters. Should read as written by a specific person with a point of view.",
+      "assertions": [
+        "No clichéd opener ('En el mundo actual', 'Hoy en día', 'En la sociedad contemporánea')",
+        "No AI buzzwords (transformador, integral, potenciar, cautivar, etc.)",
+        "No mechanical connectors used as sentence starters (Asimismo, Cabe destacar, Es importante mencionar)",
+        "No hedge cluster (puede que, en algunos casos, dependiendo de la situación — 2+ in same paragraph)",
+        "Sentence lengths vary — not all the same length",
+        "Takes a specific point of view or uses a concrete detail rather than a generic observation applicable to anyone"
+      ]
+    }
+  ]
+}
