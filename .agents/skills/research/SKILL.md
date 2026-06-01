@@ -25,20 +25,18 @@ No toda activación requiere el proceso completo. Calibrar la profundidad según
 
 | Modo | Cuándo aplicar | Qué usar |
 |---|---|---|
-| **Investigación completa** | Nueva pregunta de investigación desde cero | Los 8 pasos completos |
+| **Investigación completa** | Nueva pregunta de investigación desde cero | Pasos 1–4 + invocar `analytical-synthesis` |
 | **Complemento / profundización** | "Cuéntame más de X", ampliar un punto ya tratado | Desde el paso relevante al gap |
-| **Zoom en dimensión** | "Considerando solo el aspecto Y..." | Solo las dimensiones pedidas |
-| **Comparación directa** | "¿Cuál fue más determinante, A o B?" | Síntesis + validación cruzada |
+| **Zoom en dimensión** | "Considerando solo el aspecto Y..." | Paso 3–4 + invocar `analytical-synthesis` Step 2 |
+| **Comparación directa** | "¿Cuál fue más determinante, A o B?" | Invocar `analytical-synthesis` Steps 3–4 |
 | **Aclaración conceptual** | "¿Qué significa X?" | Definición con contexto, sin estructura completa |
-| **Validación de hipótesis** | El usuario propone una interpretación y pide confirmarla | Confirmar, matizar y señalar lo que falta |
+| **Validación de hipótesis** | El usuario propone una interpretación y pide confirmarla | Invocar `analytical-synthesis` Step 4 |
 
-**Modo rápido** — para seguimientos en diálogo, aplicar este flujo comprimido en lugar de los 8 pasos:
+**Modo rápido** — para seguimientos en diálogo, aplicar este flujo comprimido:
 
 1. Descomponer automáticamente el sub-tema o gap identificado
-2. Expandir dimensiones relevantes (sistémico)
-3. Buscar guiado por preguntas, no por keywords
-4. Síntesis jerárquica (resumen + modelo explicativo)
-5. Verificación de consistencia
+2. Buscar guiado por preguntas, no por keywords
+3. Invocar `analytical-synthesis` para síntesis jerárquica y verificación de consistencia
 
 ---
 
@@ -88,44 +86,11 @@ No consolidar desde una sola perspectiva. Contrastar:
 
 La triangulación controla sesgos y detecta puntos ciegos.
 
-### Paso 5 — Organización por dimensiones
+### Pasos 5–8 — Análisis y síntesis → invocar `analytical-synthesis`
 
-Clasificar la información recopilada en capas:
+Una vez completada la recolección de fuentes (pasos 1–4), invocar el skill `analytical-synthesis` para ejecutar los pasos de análisis. Ese skill es el propietario del framework de dimensiones, síntesis jerárquica, validación cruzada y modelo final.
 
-| Dimensión | Pregunta que responde |
-|---|---|
-| Causal | ¿Qué lo explica o genera? |
-| Estructural | ¿Cómo está organizado? |
-| Histórica | ¿Cómo evolucionó? |
-| Empírica | ¿Qué dicen los datos? |
-| Interpretativa | ¿Cómo se entiende o disputa? |
-
-No todas las dimensiones aplican siempre — usar las relevantes al tema.
-
-### Paso 6 — Síntesis analítica jerárquica
-
-Aquí ocurre el valor real. No resumir: integrar críticamente en dos capas:
-
-**Capa 1 — Resumen estructurado:** qué dice cada dimensión, qué patrones emergen, qué tensiones o contradicciones existen entre fuentes.
-
-**Capa 2 — Modelo explicativo:** una posición propia construida a partir de la evidencia. No es "todos tienen razón" — es una explicación integrada que resuelve las tensiones identificadas o señala explícitamente por qué no se resuelven.
-
-### Paso 7 — Validación cruzada
-
-Antes de cerrar, chequear:
-
-- ¿Existe una teoría alternativa que explique lo mismo mejor?
-- ¿Qué datos podrían refutar la explicación construida?
-- ¿Qué dimensiones quedan sin cubrir?
-
-### Paso 8 — Modelo final
-
-Estructurar la salida en:
-
-1. **Marco conceptual** — definiciones y encuadre del tema
-2. **Dimensiones del fenómeno** — con evidencia por cada una
-3. **Tensiones y debates** — perspectivas en conflicto
-4. **Integración final** — modelo explicativo propio
+Los pasos 1–4 son exclusivos de `research`. Los pasos 5–8 son responsabilidad de `analytical-synthesis`.
 
 ---
 
@@ -133,10 +98,9 @@ Estructurar la salida en:
 
 - **No empezar por buscar** — definir primero el mapa del tema; buscar sin mapa produce acumulación, no comprensión.
 - **Buscar por preguntas, no por keywords** — una keyword recupera información; una pregunta recupera relevancia.
-- **Síntesis ≠ resumen** — si la salida solo parafrasea fuentes, no cumple el paso 6. Debe haber interpretación y posición propia.
+- **Síntesis ≠ resumen** — si la salida solo parafrasea fuentes, `analytical-synthesis` no ha hecho su trabajo. Debe haber interpretación y posición propia.
 - **Triangulación es obligatoria** — una sola fuente o perspectiva invalida la investigación aunque sea académica.
-- **Las dimensiones son herramienta, no checklist** — no forzar todas si el tema no lo requiere.
-- **No sobrestructurar seguimientos** — aplicar los 8 pasos a una aclaración conceptual o una pregunta de seguimiento es excesivo e interrumpe el diálogo. Usar el modo rápido.
+- **No sobrestructurar seguimientos** — aplicar el proceso completo a una aclaración conceptual o un seguimiento es excesivo. Usar el modo rápido.
 
 ---
 
@@ -156,3 +120,7 @@ Estructurar la salida en:
 ## Resources
 
 - **`evals/evals.json`** — casos de prueba para verificar que el skill produce análisis correctos.
+
+## Dependencias
+
+- **`analytical-synthesis`** — requerido para pasos 5–8. Debe estar disponible en el mismo directorio de skills.

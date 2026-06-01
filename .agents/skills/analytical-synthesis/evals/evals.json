@@ -1,0 +1,39 @@
+[
+  {
+    "id": "as-001",
+    "prompt": "Analyze why Peru has had 6 presidents in 7 years (2016–2023). What explains this pattern?",
+    "expected_behavior": "Builds concept map, applies dimensional analysis, produces an explanatory model that commits to a position",
+    "assertions": [
+      "Builds a concept map identifying key actors, concepts, and relationships before analyzing",
+      "Uses at least 3 dimensions (e.g. causal, structural, historical)",
+      "Distinguishes proximate causes from structural causes",
+      "Layer 2 produces an explanatory model that commits to a position — not 'all sides have a point'",
+      "Runs cross-validation: names at least one alternative explanation and explains why it was rejected or qualified",
+      "Does not add external search — works only from information in context"
+    ]
+  },
+  {
+    "id": "as-002",
+    "prompt": "Compare the ideological projects of Velasco (1969) and Fujimori (1992). What do they have in common structurally?",
+    "expected_behavior": "Maps both subjects, applies dimensional analysis to each, synthesizes into a unified explanatory model identifying shared structural pattern",
+    "assertions": [
+      "Maps key concepts for both subjects before comparing",
+      "Applies at least one ideological dimension and one structural dimension",
+      "Layer 2 model identifies a shared structural pattern — not just lists of differences",
+      "Names at least one tension in the comparison and either resolves it or explicitly states why it cannot be resolved",
+      "Cross-validation step identifies what the model cannot explain or what evidence would refute it"
+    ]
+  },
+  {
+    "id": "as-003",
+    "prompt": "A text has been summarized. Now analyze its argumentative structure — what is the author actually arguing and how does the argument hold together?",
+    "expected_behavior": "Maps the argument's internal logic, applies interpretive and ideological dimensions, produces hierarchical synthesis without adding external knowledge",
+    "assertions": [
+      "Maps the argumentative structure: thesis, key claims, logical moves",
+      "Does not import external knowledge about the author or topic",
+      "Identifies at least one tension or paradox in the argument",
+      "Produces an integrated position in Layer 2, not a restatement of the text's own conclusions",
+      "Cross-validation asks what would weaken or refute the argument as constructed"
+    ]
+  }
+]

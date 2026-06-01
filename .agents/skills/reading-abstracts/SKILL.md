@@ -5,7 +5,7 @@ user-invocable: true
 argument-hint: "e.g. full / short / corto / follow-up"
 ---
 
-Skill for producing two-format reading abstracts — full (resumen-lectura) and short (resumen-corto) — from any academic or essay reading provided by the user. All content is derived exclusively from the provided text. Follow-up questions are always answered in coherence with that reading. Applies research skill principles (concept mapping, dimensional analysis, hierarchical synthesis) to organize information analytically, not just sequentially.
+Skill for producing two-format reading abstracts — full (resumen-lectura) and short (resumen-corto) — from any academic or essay reading provided by the user. All content is derived exclusively from the provided text. Follow-up questions are always answered in coherence with that reading. Invokes `analytical-synthesis` for concept mapping, dimensional analysis, and hierarchical synthesis — applied strictly to the provided text, never to external sources.
 
 ## When to apply this skill
 
@@ -34,9 +34,11 @@ Before writing a single section, build an internal map of the text:
 
 This map determines section structure. Sections must reflect the argument's logic, not the reading's table of contents.
 
-### Step 2 — Apply dimensional analysis (from research skill)
+### Step 2 — Apply dimensional analysis → invoke `analytical-synthesis`
 
-Classify the content of the reading by dimension — use only the ones that are present:
+Invoke the `analytical-synthesis` skill for this step. It owns the dimensional analysis framework (Step 2 of its workflow). Apply it exclusively to the provided text — no external sources.
+
+Quick reference — dimensions present in academic texts:
 
 | Dimension | Question it answers |
 |---|---|
@@ -46,7 +48,7 @@ Classify the content of the reading by dimension — use only the ones that are 
 | **Interpretative** | How is the phenomenon understood, disputed, or re-framed? |
 | **Ideological** | What function do ideas, norms, or symbols serve in the system? |
 
-Use these dimensions to assign each section of the abstract to its analytical role. This prevents a flat, sequential summary.
+Use these dimensions to assign each section of the abstract to its analytical role. This prevents a flat, sequential summary. For the full dimensions guide, load `references/dimensions.md` from the `analytical-synthesis` skill.
 
 ### Step 3 — Generate output
 
@@ -139,7 +141,7 @@ When the user asks a follow-up question about a summarized reading:
 2. **Quote when possible**: use a blockquote from the original text to ground the answer.
 3. **Label any external context explicitly**: if the user explicitly asks to expand beyond the text, clearly mark external content with `> [Contexto externo — no proviene de la lectura]`.
 4. **Maintain dimensional coherence**: if expanding on a structural point, stay in the structural dimension. Don't drift into historical tangents unless the text supports it.
-5. **Apply research skill quick mode** for follow-ups: decompose the sub-topic → expand relevant dimension → synthesize in 2–4 paragraphs → verify consistency with the reading.
+5. **Invoke `analytical-synthesis`** for follow-ups: apply dimensional analysis to the relevant sub-topic → synthesize in 2–4 paragraphs → verify consistency with the reading. Scope strictly to what the text says.
 
 ---
 

@@ -7,11 +7,11 @@ metadata:
   version: "1.1"
 ---
 
-# Human Redaction
-
 Simulate authentic human writing by diagnosing and eliminating AI patterns, then applying humanization techniques. The goal is prose that reads as written by a specific person with a voice — not a polished, neutral machine.
 
 ## When to apply this skill
+
+Apply immediately and fully when:
 
 - User says "humanize", "rewrite like a human", "make it sound natural", "avoid AI detection"
 - User asks for "redacción humana", "que no parezca IA", "hazlo sonar natural"
@@ -136,6 +136,8 @@ After rewriting, do a final pass:
 - Does the conclusion introduce claims that were never established in the body?
 
 If any check fails, fix before delivering. For consistency failures: scale the conclusion down to match the evidence — don't patch by adding new unsupported claims.
+
+**Deep coherence audit:** when the text is analytically complex (comparisons, causal claims, multi-section arguments), invoke the `analytical-synthesis` skill's Step 4 (cross-validation) before closing.
 
 ---
 
