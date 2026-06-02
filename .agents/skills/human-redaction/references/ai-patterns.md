@@ -188,7 +188,15 @@ Adding `## headers` to emails, personal essays, short blog posts, or texts where
 Used where a comma, period, or parentheses would be natural. AI uses them for manufactured drama:
 - *"The solution — and it's simpler than you think — is right in front of you."* (overuse pattern)
 
-**Note for Spanish:** Em dashes are legitimate in Spanish for parenthetical asides and dialogue attribution. Overuse is an English-specific flag.
+**Em dash as inline qualifier or descriptor (universal flag — both languages):**
+Using an em dash to append a label or rating directly to a term:
+- *"Threat of new entrants — Intensity: Low"*
+- *"Amenaza de nuevos competidores — Intensidad: Baja"*
+- *"Strategy — Recommendation: Prioritize"*
+
+Real humans almost never write this way outside of typeset books or formatted reference tables. In running prose or analytical writing it reads as machine-generated structure. Replace with a sentence, parentheses, or a colon on the following line.
+
+**Note for Spanish:** Em dashes are legitimate in Spanish for parenthetical asides and dialogue attribution. Overuse is an English-specific flag. The inline-qualifier pattern is an AI flag in both languages.
 
 ### Bullet list overuse
 Converting naturally flowing prose into bullet points. Academic papers, personal letters, and opinion pieces shouldn't look like slide decks.

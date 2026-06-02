@@ -128,6 +128,7 @@ After rewriting, do a final pass:
 - Is the rhythm varied, or did you create a new monotonous pattern?
 - Does the conclusion sound formulaic ("In conclusion, we have seen...")?
 - Spanish: does it still use impersonal constructions where personal ones would be natural?
+- **Em dash check (mandatory):** search the output for `—`. Every instance must be dialogue attribution. If it's a parenthetical aside or inline qualifier, replace it with parentheses or rewrite before delivering.
 
 **Source consistency check (always run this):**
 - Does every conclusion follow logically from evidence actually presented in the text?
@@ -146,7 +147,7 @@ If any check fails, fix before delivering. For consistency failures: scale the c
 - **Don't over-humanize** — removing all structure makes text hard to follow. The goal is natural, not chaotic.
 - **Register matters** — a formal report humanized too aggressively becomes unprofessional. Match the output register to the context.
 - **Contractions in Spanish** — Spanish doesn't contract the same way English does. Humanization in Spanish relies more on verb choice, word order, and personal voice than on contractions.
-- **Em dash vs. dash** — in Spanish, em dashes are legitimate for dialogue/parenthetical; in English they're an AI red flag when overused.
+- **Em dash in Spanish** — the only legitimate use in Spanish is dialogue attribution (attributing spoken words to a speaker). Em dashes as parenthetical asides in analytical, academic, or professional prose are an AI pattern in both languages. Use parentheses or rewrite the sentence instead. When in doubt, replace with parentheses.
 - **Specificity beats authenticity tricks** — one concrete specific detail (a real number, a named place, a sensory observation) is worth ten stylistic tweaks.
 - **Don't invent facts** — if the user's text makes a claim, humanize the *language* around it, not the *content*.
 - **Stay accountable to sources** — human writers only draw conclusions their evidence supports. A conclusion that outreaches its evidence is a clear AI tell, even if the prose itself sounds natural. Scale conclusions down to match the evidence; never add new unsupported claims to justify an overreaching conclusion.
@@ -164,6 +165,7 @@ If any check fails, fix before delivering. For consistency failures: scale the c
 | Starting with "Look," or "Here's the thing:" | These have become their own AI clichés |
 | Removing all hedging | Some contexts require epistemic humility; hedge only when necessary |
 | Translating idioms literally between languages | Each language has its own natural informal markers |
+| Em dash as an inline qualifier or descriptor (`Term — Label: Value`, e.g. `Force Name — Intensity: Low`) | Real humans almost never write this way outside of published books. It reads as AI-generated structure. Use a separate sentence, parentheses, or a colon instead. |
 
 ---
 
