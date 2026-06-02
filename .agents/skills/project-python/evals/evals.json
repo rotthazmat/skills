@@ -8,7 +8,7 @@
       "assertions": [
         "Creates src/<module>/__init__.py and src/<module>/operations.py — business logic lives in operations.py, not index.py",
         "index.py contains only a main() function that orchestrates calls to src modules — no business logic inline",
-        "test.py runs pytest via subprocess using venv/bin/pytest, not bare pytest",
+        "test.py runs pytest via subprocess using sys.executable and '-m', 'pytest' — not venv/bin/pytest nor bare pytest",
         "tests/conftest.py defines input_dir and output_dir fixtures using tmp_path",
         "Tests include at least one negative case (e.g. missing file raises FileNotFoundError, or empty input returns empty list)",
         "Setup instructions use python3 -m venv venv to create the venv, then python (not python3) after activation"
@@ -37,7 +37,7 @@
         "Covers the happy path: valid folder with files returns them sorted ascending case-insensitively",
         "Covers at least two negative cases: missing folder raises FileNotFoundError, and either wrong type or empty input",
         "Does not add duplicate tests — each test covers a scenario not already covered by another",
-        "venv/bin/pytest is used to run tests, not bare pytest"
+        "test.py uses sys.executable and '-m', 'pytest' to run tests — not venv/bin/pytest nor bare pytest"
       ]
     }
   ]

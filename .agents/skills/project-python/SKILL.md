@@ -61,7 +61,7 @@ python3 -m venv venv
 venv/bin/pip install -r requirements.txt
 ```
 
-Always use `venv/bin/pip` and `venv/bin/pytest` — never the system Python.
+Always use `venv/bin/pip` to install (Linux/Mac) or `venv\Scripts\pip` (Windows) — never the system Python. In code, always use `sys.executable -m pytest` instead of hardcoded paths.
 
 ## Running
 
@@ -128,10 +128,10 @@ import sys
 
 def main() -> None:
     try:
-        result = subprocess.run(["venv/bin/pytest", "tests/", "-v"], check=False)
+        result = subprocess.run([sys.executable, "-m", "pytest", "tests/", "-v"], check=False)
         sys.exit(result.returncode)
     except FileNotFoundError:
-        print("pytest not found. Run: python3 -m venv venv && venv/bin/pip install pytest")
+        print("pytest not found. Run: python -m venv venv && pip install -r requirements.txt")
         sys.exit(1)
     except KeyboardInterrupt:
         print("\nTests interrupted.")
@@ -141,6 +141,8 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 ```
+
+`sys.executable` apunta al Python que corre el script — sea del venv activado o no, en cualquier OS. Nunca uses rutas hardcodeadas como `venv/bin/pytest` (falla en Windows) ni bare `pytest` (puede resolver al Python del sistema).
 
 ## Tests
 
@@ -232,10 +234,13 @@ A module that prints to the console or reads from disk paths it didn't receive a
 
 ## Gotchas
 
-- Always run `venv/bin/pytest`, never bare `pytest` — the system Python may resolve to a different environment.
+- In `test.py`, always use `sys.executable -m pytest` — never `venv/bin/pytest` (breaks on Windows) nor bare `pytest` (may resolve to system Python).
+- On Windows, terminal setup commands use `venv\Scripts\pip` instead of `venv/bin/pip`. In code, always use `sys.executable` to avoid OS-specific paths.
 - When `input/` and `output/` are used, create them via `mkdir(exist_ok=True)` in `index.py` — never commit them.
 - `python3` is used only once — to create the venv. Every subsequent command uses `python` inside the activated venv.
 - Never pass raw string paths between modules — use `pathlib.Path` and receive paths as parameters.
+- **PDF rendering:** For simple Markdown use WeasyPrint (~15 MB, no JS). For complex content with Mermaid diagrams or JavaScript use Playwright (~300 MB, requires `playwright install chromium` after `pip install playwright`). WeasyPrint requires GTK3 on Windows (not included by default) — prefer Playwright for cross-platform projects with complex rendering.
+- **Projects with external binary downloads** (e.g. Playwright's Chromium): include `uninstall.py` using `assets/uninstall.py` as template. Borra `venv/` y la carpeta del binario en cualquier OS.
 
 ## Resources
 
@@ -247,4 +252,5 @@ A module that prints to the console or reads from disk paths it didn't receive a
 - **`references/testing.md`** — full conftest.py and test file examples, mocking patterns, anti-patterns table, and parametrize guidance. Load when writing or reviewing tests.
 - **`references/solid-examples.md`** — before/after worked examples of SOLID and Separation of Concerns applied to Python modules. Load when refactoring or restructuring a project.
 - **`references/migration.md`** — step-by-step guide for migrating an existing monolithic script to these conventions. Load when refactoring an existing project.
+- **`assets/uninstall.py`** — cross-platform uninstall script template. Use when the project downloads external binaries (e.g. Playwright's Chromium). Borra `venv/` y el directorio del binario según el OS.
 - **`evals/evals.json`** — test cases covering project creation, refactoring, and test authoring scenarios.
