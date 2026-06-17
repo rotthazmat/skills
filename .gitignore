@@ -37,4 +37,5 @@ build/
 
 # 3rd party skills
 /.agents/skills/caveman/
+/.agents/skills/fastapi-templates/
 
