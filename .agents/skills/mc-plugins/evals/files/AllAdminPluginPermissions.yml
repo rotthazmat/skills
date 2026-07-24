@@ -1,0 +1,36 @@
+name: StockAlerts
+version: '${project.version}'
+main: com.example.stockalerts.StockAlerts
+api-version: '1.20'
+softdepend: [OnlineIdentityChecker]
+
+commands:
+  stockalerts:
+    description: Manage low-stock alert thresholds
+    usage: /stockalerts <help|setthreshold|reload|save> [args]
+    permission: stockalerts.admin
+    permission-message: You don't have permission to use this command
+
+permissions:
+  stockalerts.setthreshold:
+    description: Allows setting the low-stock threshold
+    default: op
+  stockalerts.reload:
+    description: Allows reloading configuration
+    default: op
+  stockalerts.save:
+    description: Allows saving configuration
+    default: op
+  stockalerts.admin:
+    description: All /stockalerts subcommands
+    default: op
+    children:
+      stockalerts.help: true
+      stockalerts.setthreshold: true
+      stockalerts.reload: true
+      stockalerts.save: true
+  stockalerts.*:
+    description: All StockAlerts permissions
+    default: op
+    children:
+      stockalerts.admin: true

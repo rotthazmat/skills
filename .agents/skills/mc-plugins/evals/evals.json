@@ -1,0 +1,101 @@
+{
+  "skill_name": "mc-plugins",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm scaffolding a new Spigot plugin called CropBooster. It tracks how many crops each player has harvested and saves that to a YAML file. Can you set up the player UUID handling for it?",
+      "expected_output": "Creates a UUIDHelper class matching the reference OIC pattern: static initialize() that looks up the OnlineIdentityChecker plugin, checks isEnabled(), and reflectively caches getUUIDFromName(String); static getRealUUID(Player) returning String that falls back to player.getUniqueId().toString(). Adds softdepend: [OnlineIdentityChecker] to plugin.yml. Uses UUIDHelper.getRealUUID() as the storage key rather than raw player.getUniqueId().",
+      "assertions": [
+        "getRealUUID (or equivalent method) is declared to return String, not UUID",
+        "initialize() checks both that the plugin lookup is non-null and that isEnabled() is true before caching the reflection method",
+        "Falls back to player.getUniqueId().toString() when OnlineIdentityChecker is absent or unavailable",
+        "plugin.yml includes softdepend: [OnlineIdentityChecker]",
+        "Harvest-count storage code keys off UUIDHelper.getRealUUID(player) rather than player.getUniqueId() directly"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you review evals/files/ShallowConfigSaver.java for any issues with how it saves the config file?",
+      "files": ["evals/files/ShallowConfigSaver.java"],
+      "expected_output": "Flags saveConfigWithHeader() as the shallow-save anti-pattern: it writes CONFIG_HEADER directly to the file without ever calling config.saveToString(), so every real config value (growth-multiplier, enabled-worlds) is discarded on save instead of persisted. Recommends merging saveToString() (stripped of residual # lines) with the header before writing, per the writeWithHeader pattern.",
+      "assertions": [
+        "Identifies that saveConfigWithHeader() never calls config.saveToString()",
+        "States that this causes real config values to be lost/discarded on save, not just a cosmetic issue",
+        "Recommends the writeWithHeader pattern: strip residual '#' lines from saveToString() output and prepend the header",
+        "Does not claim the file is fully compliant"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "This plugin just toggles server-wide PvP on and off from a config value — nothing player-specific. Does it need the UUIDHelper / OnlineIdentityChecker setup?",
+      "expected_output": "States that OIC/UUIDHelper integration is conditional, not universal, and is not needed here since the plugin has no per-player persisted data. Does not fabricate a UUIDHelper class or add softdepend: [OnlineIdentityChecker]. May note the YAML header pattern still applies to the config file itself if it's saved at runtime.",
+      "assertions": [
+        "Explicitly states OIC/UUIDHelper is not required for this plugin",
+        "Gives the reason: no per-player data is persisted",
+        "Does not instruct adding softdepend: [OnlineIdentityChecker] or creating a UUIDHelper class",
+        "Does not claim OIC integration is mandatory for every plugin"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Take a look at evals/files/BigCommandHandler.java — is this file okay structurally, or does it need refactoring?",
+      "files": ["evals/files/BigCommandHandler.java"],
+      "expected_output": "Flags the file as a God class handling many subcommands (create/delete/setwarp/seticon/enable/disable/addplayer/removeplayer/list/info, plus 12 more noted in the comment) inline in one onCommand method with growing size (noted to reach past 800 lines). Recommends splitting into one handler class per subcommand implementing a shared interface (e.g. SubcommandHandler), dispatched via a router/dispatcher class.",
+      "assertions": [
+        "Identifies the file as a God class / SRP violation due to handling too many subcommands in one method",
+        "Recommends splitting into per-subcommand handler classes",
+        "Recommends a dispatcher/router class to look up and delegate to the right handler",
+        "Notes the file's size/subcommand count as the concrete signal for the God-class threshold"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Review evals/files/AdminCommand.java — I want to make sure the permission handling and help text follow our usual conventions.",
+      "files": ["evals/files/AdminCommand.java"],
+      "expected_output": "Flags two separate issues: (1) the reload subcommand gates on sender.isOp() instead of a dedicated permission node (e.g. zones.admin.reload, default op), which can't be granted to non-op staff through a permissions plugin; (2) sendHelp() shows the PAPI placeholder section unconditionally to every player instead of wrapping it in the same admin permission check, when it should only be visible to admins.",
+      "assertions": [
+        "Flags the sender.isOp() check as needing to be replaced with a dedicated permission node",
+        "Recommends declaring that permission node in plugin.yml with default: op",
+        "Flags the PAPI placeholder section in sendHelp() as visible to all players instead of gated on the admin permission",
+        "Does not treat the PAPI visibility issue as acceptable just because the expansion registration logic is out of scope"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Here's the plugin.yml for a new StockAlerts plugin I'm working on (evals/files/AllAdminPluginPermissions.yml) — every subcommand is admin-only so I made the whole thing default to op, including help. Does that look right?",
+      "files": ["evals/files/AllAdminPluginPermissions.yml"],
+      "expected_output": "States that stockalerts.help should NOT be nested inside stockalerts.admin's children with default: op — help should stay a standalone permission with default: true even though every other subcommand (setthreshold, reload, save) is correctly op-gated, so regular players can still run /stockalerts help. Recommends moving stockalerts.help out of the admin children map, giving it its own default: true entry, and listing it alongside (not inside) stockalerts.admin in the stockalerts.* wildcard's children.",
+      "assertions": [
+        "Identifies that stockalerts.help defaults to op via the admin parent instead of defaulting to true",
+        "States explicitly that help should default to true even though every other subcommand here is legitimately op-gated",
+        "Recommends stockalerts.help become a standalone permission, not a child of stockalerts.admin",
+        "Does not accept the all-op setup as correct just because the plugin has no player-facing functional subcommands"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Can you double check evals/files/IncompleteReloadCommand.java? I want to make sure reload and save both work correctly before I ship this.",
+      "files": ["evals/files/IncompleteReloadCommand.java"],
+      "expected_output": "Flags that the reload branch only calls configManager.reload() and never calls harvestDataManager.reload() — so /cropbooster reload silently reloads nothing but config.yml, leaving harvest data stale, even though it reports success. Notes that save is correct by contrast (it calls .save() on both configManager and harvestDataManager) and that reload should mirror save by calling every manager. Also flags that HarvestDataManager likely has no reload() method to call in the first place, per the required save()/reload() pair on every manager.",
+      "assertions": [
+        "Identifies that the reload branch never calls harvestDataManager.reload()",
+        "States this means harvest data is not actually reloaded despite the command reporting success",
+        "Contrasts with the save branch, which correctly calls .save() on both managers",
+        "Recommends adding a reload() method to HarvestDataManager (mirroring its save()) and calling it from the command's reload branch",
+        "Does not treat the reload branch as correct just because it compiles and runs without error"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Review evals/files/DirectAdminPapiCheck.java — is the PAPI placeholder section gated correctly?",
+      "files": ["evals/files/DirectAdminPapiCheck.java"],
+      "expected_output": "Flags that the PAPI Placeholders section is gated by directly checking sender.hasPermission(\"zones.admin\") instead of a dedicated zones.papi permission. Recommends introducing zones.papi as its own node (declared in plugin.yml, default: op, a child of zones.admin) and checking that instead, so PAPI-doc visibility can be revoked from an admin independently of their other admin permissions. Also notes that whatever permission is used must actually be declared in plugin.yml, not just checked in code.",
+      "assertions": [
+        "Flags that the PAPI section checks zones.admin directly rather than a dedicated PAPI-specific permission",
+        "Recommends a separate zones.papi node as a child of zones.admin, not a direct re-check of zones.admin",
+        "Explains the benefit: PAPI-doc visibility can be revoked independently of other admin permissions",
+        "Does not accept checking the admin permission directly as sufficient just because it happens to work for admins"
+      ]
+    }
+  ]
+}

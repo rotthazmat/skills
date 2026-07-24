@@ -1,0 +1,66 @@
+name: MyPlugin
+version: '${project.version}'
+main: com.example.plugin.MyPlugin
+api-version: 1.20
+description: One-line description of what the plugin does
+author: YourName
+# depend: [Vault]                              # only if the plugin cannot function without it
+softdepend: [OnlineIdentityChecker, PlaceholderAPI]
+
+commands:
+  myplugin:
+    description: Main player-facing command
+    usage: /myplugin <use|help> [args]
+    permission: myplugin.help
+    permission-message: You don't have permission to use this command
+  myplugin-admin:
+    # save and reload are mandatory on every plugin in this family, not
+    # optional extras — see them here even in this minimal example.
+    description: Admin operations for MyPlugin
+    usage: /myplugin-admin <save|reload> [args]
+    permission: myplugin.admin
+    permission-message: You don't have permission to use this command
+    aliases: [mpadmin]
+
+permissions:
+  # ---- player-facing (default: true) ----
+  # myplugin.help stays default: true even in a plugin where every OTHER
+  # subcommand below ends up op-only — never move it into myplugin.admin's
+  # children just because the rest of the command is admin-facing.
+  myplugin.help:
+    description: Allows using /myplugin help
+    default: true
+  myplugin.use:
+    description: Allows using the plugin's core player-facing action
+    default: true
+
+  # ---- admin-facing (default: op), grouped under one parent ----
+  myplugin.admin.save:
+    description: Allows saving all plugin data to disk on demand
+    default: op
+  myplugin.admin.reload:
+    description: Allows reloading plugin config AND all data files from disk
+    default: op
+  # Dedicated node for PAPI-placeholder-doc visibility in /myplugin help —
+  # kept separate from myplugin.admin itself so it can be revoked without
+  # touching an admin's other permissions. Only needed if this plugin
+  # registers a PlaceholderAPI expansion.
+  myplugin.papi:
+    description: View PAPI placeholder documentation in /myplugin help
+    default: op
+  myplugin.admin:
+    description: All /myplugin-admin subcommands
+    default: op
+    children:
+      myplugin.admin.save: true
+      myplugin.admin.reload: true
+      myplugin.papi: true
+
+  # ---- wildcard: grants everything ----
+  myplugin.*:
+    description: All MyPlugin permissions
+    default: op
+    children:
+      myplugin.help: true
+      myplugin.use: true
+      myplugin.admin: true
