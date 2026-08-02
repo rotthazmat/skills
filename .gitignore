@@ -36,6 +36,5 @@ build/
 .claude/settings.local.json
 
 # 3rd party skills
-/.agents/skills/caveman/
-/.agents/skills/fastapi-templates/
-
+/caveman/
+/fastapi-templates/
