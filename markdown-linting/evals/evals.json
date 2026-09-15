@@ -1,0 +1,66 @@
+{
+  "skill_name": "markdown-linting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Can you review this markdown file and tell me if anything's off with it?",
+      "expected_output": "Lists all violations: multiple H1 headings, a heading with trailing punctuation and missing surrounding blank lines, a fenced code block with no language tag, mixed bullet markers (-, *, +), a bare URL, an image with empty alt text, multiple consecutive blank lines, a heading missing a space after '#', a heading with too many spaces after '#', an indented heading, reversed link syntax, spaces inside link-text brackets, spaces inside bold markers, a blockquote incorrectly split by a blank line, a blockquote with extra spaces after '>', and inconsistent horizontal rule styles (--- vs ***).",
+      "files": ["evals/files/bad-doc.md"],
+      "assertions": [
+        "Reports more than one H1 heading in the document",
+        "Reports the fenced code block missing a language tag",
+        "Reports the mixed bullet markers (-, *, and + all used)",
+        "Reports the bare URL (https://example.com) not wrapped in link syntax or angle brackets",
+        "Reports the image with empty alt text",
+        "Reports the reversed link syntax '(reversed link)[https://example.com]'",
+        "Reports the blockquote that gets split into two by a blank line",
+        "Reports the inconsistent horizontal rule styles (both --- and *** used)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write me a short README section documenting how to install and run this CLI tool.",
+      "expected_output": "Produces markdown with a single consistent bullet marker, a fenced code block with a declared language, blank lines around every heading, and no trailing whitespace or bare URLs.",
+      "assertions": [
+        "Uses only one bullet marker style throughout (not a mix of -, *, +)",
+        "Any fenced code block declares a language (e.g. ```bash)",
+        "Headings have a blank line before and after them",
+        "Does not introduce more than one H1",
+        "No bare URLs left unwrapped in prose"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Quick fix — just change 'recieve' to 'receive' on line 12 of this doc, nothing else.",
+      "expected_output": "Makes the requested typo fix but still applies markdown best practices to the touched file rather than treating the small scope as an exemption — e.g. does not introduce trailing whitespace or break existing heading/list formatting while editing, and does not skip checking the file because the task was described as minor.",
+      "assertions": [
+        "Performs the requested word correction",
+        "Does not introduce new trailing whitespace, tabs, or extra blank lines while editing",
+        "Does not treat 'quick fix' as a reason to skip markdown formatting rules",
+        "Leaves the rest of the file's structure (headings, lists) intact and valid"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "This file already uses * for all its bullets everywhere. Add one more list item under the 'Features' section.",
+      "expected_output": "Adds the new bullet using the file's existing * marker convention rather than switching to the skill's default - marker, preserving consistency with the established file style.",
+      "assertions": [
+        "New bullet uses * to match the file's existing convention",
+        "Does not rewrite or convert the file's existing bullets to a different marker",
+        "Explains or otherwise reflects that matching existing convention takes precedence over the default preference",
+        "New list item still has correct spacing (one space after the marker)"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "This SKILL.md I'm writing starts straight with an ## Overview heading and never has a top-level # title. Is that a problem?",
+      "expected_output": "Explains that this is fine and intentional under this skill's rules — a document does not need an H1 (this skill deliberately does not enforce the common MD002/MD041 'first heading must be H1' rule) — while still checking the rest of the document (heading level increments, spacing, blank lines) normally.",
+      "assertions": [
+        "States that a missing H1 is not a violation under this skill's rules",
+        "References that this is a deliberate deviation from the common MD002/MD041 default, not an oversight",
+        "Does not suggest inserting an H1 purely to satisfy a 'first heading must be top-level' rule",
+        "Still checks/mentions other applicable rules (e.g. heading level increments) rather than skipping review entirely"
+      ]
+    }
+  ]
+}
