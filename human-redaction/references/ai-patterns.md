@@ -60,6 +60,7 @@ Words that spiked in use after ChatGPT's release. Research (Helsinki 2025, Wikip
 ## 2. Formulaic Sentence Starters and Connectors
 
 ### English (mechanical connectors)
+
 - *Furthermore,* / *Moreover,* / *Additionally,* / *In addition,*
 - *It is worth noting that* / *It is important to note that* / *Notably,*
 - *However,* (when overused or placed mechanically to signal contrast)
@@ -70,6 +71,7 @@ Words that spiked in use after ChatGPT's release. Research (Helsinki 2025, Wikip
 - *Let's explore* / *Let's dive into* / *Let's unpack*
 
 ### Spanish (mechanical connectors — all high-frequency AI markers)
+
 **Openers:**
 - *Cabe destacar que* / *Cabe señalar que* / *Cabe mencionar que*
 - *Es importante mencionar* / *Es preciso destacar* / *Es fundamental tener en cuenta*
@@ -99,6 +101,7 @@ Words that spiked in use after ChatGPT's release. Research (Helsinki 2025, Wikip
 ## 3. Clichéd Openings
 
 ### English
+
 - "In today's fast-paced world..."
 - "In today's digital landscape..."
 - "As technology continues to evolve..."
@@ -111,6 +114,7 @@ Words that spiked in use after ChatGPT's release. Research (Helsinki 2025, Wikip
 - "Imagine a world where..."
 
 ### Spanish
+
 - "En el mundo actual..."
 - "En la sociedad contemporánea..."
 - "Hoy en día, vivimos en un mundo..."
@@ -128,6 +132,7 @@ Words that spiked in use after ChatGPT's release. Research (Helsinki 2025, Wikip
 AI hedges constantly to avoid being wrong. Three or more hedges in one paragraph is a red flag.
 
 ### English hedges
+
 - *may*, *might*, *could*, *can* (when unnecessary)
 - *potentially*, *possibly*, *perhaps*
 - *in some cases*, *in certain situations*, *under specific circumstances*
@@ -138,6 +143,7 @@ AI hedges constantly to avoid being wrong. Three or more hedges in one paragraph
 - *it depends*, *it varies*
 
 ### Spanish hedges
+
 - *puede que*, *podría ser que*, *es posible que*
 - *en algunos casos*, *en ciertos contextos*, *dependiendo de la situación*
 - *en cierta medida*, *hasta cierto punto*
@@ -151,14 +157,17 @@ AI hedges constantly to avoid being wrong. Three or more hedges in one paragraph
 ## 5. Structural AI Tells
 
 ### Paragraph uniformity
+
 All paragraphs are roughly the same length (3-4 sentences each). Human writers have outliers — a one-sentence observation, a long digressive paragraph.
 
 ### Rule of three / triplets
+
 Every list has exactly three items. Every argument has three supporting points. "X, Y, and Z" repeated throughout.
 - English: "fast, reliable, and scalable"
 - Spanish: "rápido, fiable y escalable"
 
 ### Rigid scaffolding
+
 The structure is announced before the content:
 - "In the following sections, I will explore three key aspects..."
 - "A continuación, analizaré los tres aspectos principales..."
@@ -166,25 +175,30 @@ The structure is announced before the content:
 - "En primer lugar abordaré X. A continuación, Y. Finalmente, Z."
 
 ### Hyperstructured list introductions
+
 Announcing organizational structure where none is needed:
 - "Let's divide this into three parts."
 - "There are three things to consider here."
 - "Dividamos esto en tres partes."
 
 ### Excessive parallelism
+
 Every sentence in a sequence has the same grammatical structure: "X does A. Y does B. Z does C."
 
 ### Circular conclusions
+
 The conclusion repeats the introduction in different words, adding no new information. The closing paragraph starts with a connector (*In conclusion*, *En conclusión*) and restates what was said.
 
 ### Headers in prose contexts
-Adding `## headers` to emails, personal essays, short blog posts, or texts where a human would use paragraphs. Especially suspicious with bold + colon inline headers.
+
+Adding `## headers` to emails, personal essays, short blog posts, or texts where a human would use paragraphs. Especially suspicious with bold + colon inline headers. In structured documents that legitimately need labels, use a real heading or a table cell, never `**Label:**` followed by prose.
 
 ---
 
 ## 6. Punctuation and Formatting Tells
 
 ### Excessive em dashes (—) — English red flag
+
 Used where a comma, period, or parentheses would be natural. AI uses them for manufactured drama:
 - *"The solution — and it's simpler than you think — is right in front of you."* (overuse pattern)
 
@@ -194,17 +208,43 @@ Using an em dash to append a label or rating directly to a term:
 - *"Amenaza de nuevos competidores — Intensidad: Baja"*
 - *"Strategy — Recommendation: Prioritize"*
 
-Real humans almost never write this way outside of typeset books or formatted reference tables. In running prose or analytical writing it reads as machine-generated structure. Replace with a sentence, parentheses, or a colon on the following line.
+Real humans almost never write this way outside of typeset books or formatted reference tables. In running prose or analytical writing it reads as machine-generated structure. Replace it with a full sentence or move the value into a table cell.
 
-**Note for Spanish:** Em dashes are legitimate in Spanish for parenthetical asides and dialogue attribution. Overuse is an English-specific flag. The inline-qualifier pattern is an AI flag in both languages.
+**Note for Spanish:** in analytical, academic, or professional Spanish prose the only legitimate em dash is dialogue attribution. Asides with em dashes are an AI flag in both languages, and so is the inline-qualifier pattern.
+
+### Colons in running prose (universal flag — both languages)
+
+AI uses the colon as a hinge to announce whatever comes next. Human prose rarely needs it.
+- Reveal colon: *"The answer is simple: consistency."* / *"La clave es simple: constancia."*
+- Explanation colon: *"Correcto: el pedido no se entrega a otra persona."*
+- List colon inside a sentence: *"Queda fuera: pagos, contabilidad y base de datos."*
+- Label-colon prose, where a paragraph reads like a filled template: *"Ventaja: X. Costo: Y."*, *"Supuesto: X. Duda: Y."*, *"Alternativa considerada: Z."*
+- Bold label plus colon used as a mini-header inside a paragraph: *"**Motivo:** ..."*
+
+Two or more colons in one paragraph is a strong signal. A single colon that introduces a literal quotation is fine.
+
+### Parenthetical asides (universal flag — both languages)
+
+AI stacks clarifications in parentheses because it hedges and over-explains.
+- Examples: *"(por ejemplo, X)"*, *"(e.g., X)"*
+- Restatements: *"(es decir, Y)"*, *"(i.e., Y)"*
+- Navigation and meta notes: *"(ver abajo)"*, *"(see below)"*, *"(completar)"*, *"(opcional)"*
+- Inline labels: *"los mensajes 5 y 6 (error)"*, *"R-03 (calidad medible)"*
+
+Human writers keep parentheses for very specific cases such as citations, acronyms on first use, and notation. Everything else either fits in the sentence with commas or does not need to be said.
+
+**Exceptions that are not AI tells:** APA citations `(Autor, 2024)` and reference lists, acronyms defined on first use, code, formulas, function signatures, times and ratios `10:30`, formats explicitly required by a form or template, and a colon that opens a literal quotation or dialogue.
 
 ### Bullet list overuse
+
 Converting naturally flowing prose into bullet points. Academic papers, personal letters, and opinion pieces shouldn't look like slide decks.
 
 ### Bold overuse
+
 Bolding 3-5 words per paragraph. Corporate presentation habit.
 
 ### Emoji as formatting markers
+
 Using emoji as list bullets (→, ✓, 🔑) in text that should be prose.
 
 ---
@@ -212,12 +252,14 @@ Using emoji as list bullets (→, ✓, 🔑) in text that should be prose.
 ## 7. Sentence-Level Patterns
 
 ### "is/are" avoidance
+
 AI replaces simple state verbs with elaborate alternatives to appear sophisticated:
 - *serves as*, *stands as*, *marks*, *represents*, *features*, *offers*, *boasts*, *maintains*
 - "The tool *serves as* a way to..." → "The tool is..."
 - "This *represents* a major shift" → "This is a major shift"
 
 ### Negative parallelisms (contrast framing)
+
 AI loves manufactured contrast. Overused to the point of signature:
 - "It's not just X, it's Y"
 - "Not X, but Y"
@@ -226,15 +268,18 @@ AI loves manufactured contrast. Overused to the point of signature:
 - "No es X, es Y"
 
 ### Appended "-ing" constructions
+
 Present participle phrases tacked onto the end of sentences to add apparent depth without substance:
 - "The team completed the project, *demonstrating* their commitment to quality."
 - "El equipo completó el proyecto, *demostrando* su compromiso con la calidad."
 
 ### Elegant variation / excessive synonym use
+
 AI avoids repeating the same word by cycling through synonyms within a single paragraph — a stylistic tic that reads as mechanical:
 - "The *method*... the *approach*... the *technique*... the *strategy*..."
 
 ### Vague authority attributions
+
 Using unverifiable authorities to shore up claims:
 - "experts argue", "observers note", "industry reports suggest", "studies show"
 - "según expertos", "los analistas señalan", "los estudios indican"
@@ -244,19 +289,23 @@ Using unverifiable authorities to shore up claims:
 ## 8. Tone and Voice Tells
 
 ### Emotional description vs. emotional expression
+
 - AI: *"This experience can be quite challenging for many people."*
 - Human: *"It wrecked me for a week."*
 
 ### Forced balance / false neutrality
+
 Presenting "both sides" even when the writer clearly has a position, or when the topic doesn't warrant it.
 
 ### Performative enthusiasm
+
 - *"What a fascinating topic!"*
 - *"This is truly remarkable!"*
 - *"¡Qué interesante resulta este asunto!"*
 - Motivational self-help tone: *"You've got this!"*, *"The possibilities are endless!"*
 
 ### Generic analogies and metaphors
+
 Worn-out comparisons used for illustration value:
 - "like a well-oiled machine"
 - "two sides of the same coin"
@@ -265,6 +314,7 @@ Worn-out comparisons used for illustration value:
 - "las dos caras de la misma moneda"
 
 ### Transition questions used as hooks
+
 Rhetorical questions posed mid-text as engagement devices:
 - "The trick?"
 - "But why does this matter?"
@@ -272,6 +322,7 @@ Rhetorical questions posed mid-text as engagement devices:
 - "¿Cuál es el truco?"
 
 ### Artificial enthusiasm via transition phrases (English — now themselves AI tells)
+
 These started as humanization tricks; overuse has made them signals:
 - *"But here's the thing..."*
 - *"Let me be clear..."*
@@ -281,16 +332,19 @@ These started as humanization tricks; overuse has made them signals:
 - *"Here's the kicker:"*
 
 ### Significance overemphasis
+
 Connecting ordinary topics to grand historical or social trends:
 - "pivotal moment", "marks a shift", "key turning point", "indelible mark"
 - "un momento decisivo", "marca un cambio", "un hito fundamental"
 
 ### Wordcount inflation without information gain
+
 Longer sentences and paragraphs that don't add substance — a statistical signature of algorithmic text generation. If you can remove a sentence and lose nothing, it was probably AI filler.
 
 Particularly visible in conclusions: AI will often produce two or three closing paragraphs that restate the same point, as if trying to comply with a word count requirement by padding the ending.
 
 ### Summary/review instead of analysis
+
 AI describes and praises rather than argues or analyzes. Red flag in argumentative or analytical writing:
 - Summarizes what an argument says instead of making one
 - Reviews a work ("this book effectively explores...") instead of evaluating it
@@ -299,6 +353,7 @@ AI describes and praises rather than argues or analyzes. Red flag in argumentati
 The tell: sophisticated language with zero substance underneath. A human with a large vocabulary also has specific things to say.
 
 ### Technical term synonym replacement
+
 AI sometimes paraphrases fixed terms, proper nouns, or established titles as if they were ordinary vocabulary — a side effect of its synonym-variation habit:
 - "adult court" → "grown-up court"; "juvenile court" → "court for youngins"
 - "Supreme Court" → "the top legal institution"
@@ -307,11 +362,13 @@ AI sometimes paraphrases fixed terms, proper nouns, or established titles as if 
 Do NOT rephrase technical terms, proper nouns, legal/medical terminology, or established titles. Use the correct term every time.
 
 ### Serial lists repeated at sentence ends
+
 The "rule of three" is not just a structural pattern — AI also ends individual sentences with three-item lists, and repeats this pattern several times within the same paragraph:
 - "Shifting precipitation patterns disrupt growing seasons, jeopardize crop yields, and reduce agricultural productivity. Extreme events — droughts, storms, and floods — compound these effects."
 - Two consecutive sentence-ending triplets in the same paragraph is a clear signal.
 
 ### Specific high-frequency words (English)
+
 Beyond the main buzzword list, these two words appear in AI writing at rates that flag detection systems and experienced readers:
 - **"thought-provoking"** — AI's default adjective for praising intellectual content
 - **"lens"** — as in "through the lens of," "using a feminist lens" — overused as an academic-sounding framing device
@@ -321,12 +378,15 @@ Beyond the main buzzword list, these two words appear in AI writing at rates tha
 ## 9. Consistency and Coherence Tells
 
 ### Style register mismatch
+
 The written text is polished, varied, and grammatically flawless — but the same person writes choppy, error-prone prose in every other context (emails, comments, short responses). In isolation a polished text isn't suspicious; the gap between contexts is the tell.
 
 ### Own sentences inserted into AI paragraphs
+
 When a human inserts their own sentences into AI-generated blocks, those sentences tend to stand out: shorter, less formal, sometimes grammatically imperfect, using different vocabulary. The seam is usually visible.
 
 ### Hallucinated or slightly-wrong citations
+
 In research writing, AI invents sources or mixes details from real ones:
 - Titles that exist but are attributed to the wrong authors
 - DOIs or ISBNs that are malformed or lead to unrelated articles
@@ -334,6 +394,7 @@ In research writing, AI invents sources or mixes details from real ones:
 - Paradoxically: a very *low* plagiarism similarity score on a citations page is itself suspicious — real citations match known text; invented ones don't match anything
 
 ### Claims that outrun their sources
+
 AI makes sweeping conclusions that go beyond what any cited evidence actually supports. Human writers are accountable to their sources — they draw conclusions proportional to the evidence.
 
 Signs:
@@ -347,6 +408,7 @@ Signs:
 - Body presents one example; conclusion generalizes to an entire field or population
 
 ### Internal contradictions
+
 AI can contradict itself between paragraphs or sections without noticing, especially in longer texts:
 - Claiming X in paragraph 2, then implying not-X in paragraph 5
 - Attributing a position to a source in one place, then attributing the opposite position to the same source elsewhere

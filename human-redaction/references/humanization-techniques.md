@@ -142,8 +142,9 @@ Remove the visible skeleton of the text. A reader should feel the argument, not 
 **Fragments:** A one-word sentence is fine. "Exactly." "No." "Never." AI avoids fragments because they feel grammatically incomplete; humans use them for rhythm.
 
 **Spanish punctuation notes:**
-- Exclamation and question marks open and close: *¿así que no sabías?*, *¡qué barbaridad!* — use them where natural, not performatively
-- Parentheses for asides are more natural in Spanish prose than em dashes
+- Exclamation and question marks open and close, *¿así que no sabías?*, *¡qué barbaridad!*, and they belong where they are natural, not used performatively
+- Neither em dashes nor parentheses are the natural way to add an aside in Spanish prose. Commas, a subordinate clause, or a new sentence are. See #20
+- Colons are rare in natural prose in both languages. See #20
 
 ---
 
@@ -155,19 +156,21 @@ A single unexpected move signals a human wrote this:
 - A direct address to the reader mid-essay: *"Think about the last time you had to explain this to someone."*
 - A very short paragraph (one sentence) after a long one
 - A sentence that starts with *And* or *But* (grammatically acceptable; AI avoids it)
-- In Spanish: starting a sentence with *Y* or *Pero*, using a dash to introduce a qualification, or an abrupt shift in register
+- In Spanish, starting a sentence with *Y* or *Pero*, or an abrupt shift in register
 
 ---
 
 ## 10. Language-Specific Humanization
 
 ### English
+
 - Use contractions consistently
 - Prefer Anglo-Saxon words over Latinate ones (*use* not *utilize*, *start* not *commence*, *show* not *demonstrate*)
 - One or two informal markers where register allows (*Look,*, *The thing is,*, *Honestly,*)
 - Read the rewrite aloud — if a sentence is hard to say, it sounds like writing, not speech
 
 ### Spanish
+
 - Use first-person active verbs: *hice* instead of *se realizó*, *creo* instead of *cabe creer*
 - Avoid impersonal constructions: *se puede ver que* → *vemos que*, *es importante destacar* → *hay que decirlo*
 - Use regional markers naturally: *oye*, *mira*, *es que*, *resulta que*, *fíjate que* (calibrate to Spanish variant: peninsular, mexicano, rioplatense, etc.)
@@ -250,7 +253,7 @@ Participial phrases tacked onto sentence endings inflate length without adding m
 > Los estudios demuestran que el teletrabajo aumenta la productividad. Los expertos señalan que la flexibilidad es clave.
 
 **Spanish after:**
-> Un estudio de Stanford siguió a 16.000 trabajadores durante nueve meses y encontró un aumento del 13% en productividad. El factor principal no era la flexibilidad: era el trayecto que dejaban de hacer.
+> Un estudio de Stanford siguió a 16.000 trabajadores durante nueve meses y encontró un aumento del 13% en productividad. El factor principal no era la flexibilidad. Era el trayecto que dejaban de hacer.
 
 ---
 
@@ -344,6 +347,7 @@ AI pads conclusions to meet word counts, often producing two or three closing pa
 Human writers are bound by their sources. Every conclusion should be traceable back to evidence actually presented. This is one of the clearest consistency signals that separates human from AI writing.
 
 ### Three rules
+
 1. **Don't claim more than your sources support.** If the evidence is narrow, the conclusion is narrow.
 2. **Don't contradict yourself.** If you define, attribute, or assert something early in the text, be consistent with it throughout.
 3. **Don't cite a source for a claim it doesn't make.** Either find the real source or own the claim as your own inference.
@@ -362,7 +366,7 @@ Ask: *Does the evidence in the body of this text actually lead to this conclusio
 > Un estudio de 2022 con 200 estudiantes universitarios encontró correlación entre poco sueño y peores calificaciones. Esto demuestra que la falta de sueño es la causa principal del fracaso escolar en todos los niveles educativos.
 
 **Spanish after:**
-> Un estudio de 2022 con 200 estudiantes universitarios encontró correlación entre poco sueño y peores calificaciones. Es una muestra pequeña, pero apunta en la misma dirección que investigaciones más amplias: menos sueño, peor rendimiento.
+> Un estudio de 2022 con 200 estudiantes universitarios encontró correlación entre poco sueño y peores calificaciones. Es una muestra pequeña, pero apunta en la misma dirección que investigaciones más amplias, donde dormir menos va de la mano con rendir peor.
 
 ### Diagnosing internal contradictions
 
@@ -372,3 +376,32 @@ Read the text from conclusion back to opening. Check:
 - Is any term defined differently in different sections?
 
 If yes — fix the claim, not the evidence. Don't add new evidence to shore up an overreaching conclusion; scale the conclusion down to match what you have.
+
+---
+
+## 20. Rewrite Colons and Parentheses into the Sentence
+
+People rarely write with colons, and they keep parentheses for very specific cases like citations or acronyms. AI leans on both to bolt explanations, examples, and labels onto a sentence. The fix is to let the sentence carry the idea on its own.
+
+### Four moves
+
+1. **Reveal or explanation colon** becomes a verb or a second sentence. *"La razón es simple: X"* turns into *"Pasa por X"* or *"La razón es X."*
+2. **Label-colon prose** becomes a full sentence with a subject. *"Ventaja: X. Costo: Y."* turns into *"La ventaja es que X. El costo es que Y."*
+3. **Parenthetical example or restatement** becomes a comma phrase with *como*, *por ejemplo*, or *es decir*, or it gets cut if it adds nothing.
+4. **Bold label with colon** in a structured document becomes a heading or a table column, and the prose under it starts as a normal sentence.
+
+**English before:**
+> Advantage: if the rule changes, only C-02 changes. Cost: all modules share one process (so a crash takes everything down).
+
+**English after:**
+> The upside is that a rule change only touches C-02. The catch is that every module shares one process, so a crash takes everything down.
+
+**Spanish before:**
+> Queda fuera: pagos reales, contabilidad y control de stock (solo se maneja si un producto está disponible o agotado). Correcto: el pedido no se entrega a otra persona.
+
+**Spanish after:**
+> Dejamos fuera los pagos reales, la contabilidad y el control de stock. De cada producto solo sabemos si está disponible o agotado. Fue correcto, porque el pedido no se entrega a otra persona.
+
+### Final check
+
+Search the prose for `:` and `(`. Each hit must be one of the exceptions listed in the SKILL.md gotchas, such as an APA citation, an acronym, code, a time, a form-required format, or a colon that opens a literal quotation. If not, rewrite it with one of the four moves above.

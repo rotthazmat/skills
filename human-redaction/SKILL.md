@@ -4,7 +4,7 @@ description: Rewrites or reviews text to eliminate AI writing patterns and produ
 user-invocable: true
 argument-hint: "optional: paste text to humanize, or describe the writing task"
 metadata:
-  version: "1.1"
+  version: "1.2"
 ---
 
 Simulate authentic human writing by diagnosing and eliminating AI patterns, then applying humanization techniques. The goal is prose that reads as written by a specific person with a voice — not a polished, neutral machine.
@@ -62,10 +62,15 @@ Scan the text (or the task brief) for AI patterns. Load `references/ai-patterns.
 - Headers in casual writing (emails, essays, personal texts)
 - Wordcount inflation: paragraphs that can be halved without losing meaning
 
+**Punctuation red flags (universal — both languages):**
+- Excessive em dashes (—) used where a comma or period would work
+- Colons in running prose to introduce an explanation, a reveal, or a list: *"The reason is simple: X"*, *"Ventaja: si cambia..."*, *"Queda fuera: pagos, contabilidad"*
+- Bold label + colon used as an inline mini-header inside prose: *"**Motivo:** ..."*, *"Supuesto: ..."*
+- Parentheses for asides, examples, or clarifications: *"(por ejemplo, X)"*, *"(es decir, Y)"*, *"(ver abajo)"*, *"(opcional)"*. A human writer integrates these into the sentence or drops them
+
 **Tone and substance red flags:**
 - Emotions described from the outside ("this situation can be challenging") instead of felt
 - No personal opinion, only balanced neutral statements
-- Excessive em dashes (—) used where a comma or period would work (English)
 - Vague authority: *"experts argue", "studies show", "observers note"* / *"según expertos", "los analistas señalan"*
 - Generic analogies: *"like a well-oiled machine"*, *"two sides of the same coin"*
 - Significance overemphasis: *"pivotal moment", "marks a shift", "indelible mark"*
@@ -105,6 +110,7 @@ Before touching the text, state which techniques you'll apply from `references/h
 | Summary/review instead of analysis | #16 argue don't summarize |
 | Technical terms paraphrased | #17 preserve technical terms |
 | Overreaching conclusions / contradictions | #19 stay accountable to sources |
+| Colons, bold-colon labels, or parenthetical asides in prose | #20 rewrite colons and parentheses into the sentence |
 
 ### Step 3 — Rewrite
 
@@ -128,7 +134,8 @@ After rewriting, do a final pass:
 - Is the rhythm varied, or did you create a new monotonous pattern?
 - Does the conclusion sound formulaic ("In conclusion, we have seen...")?
 - Spanish: does it still use impersonal constructions where personal ones would be natural?
-- **Em dash check (mandatory):** search the output for `—`. Every instance must be dialogue attribution. If it's a parenthetical aside or inline qualifier, replace it with parentheses or rewrite before delivering.
+- **Em dash check (mandatory):** search the output for `—`. Every instance must be dialogue attribution. If it's an aside or inline qualifier, rewrite it with commas or as a separate sentence before delivering.
+- **Colon and parenthesis check (mandatory):** search the running prose for `:` and `(`. Keep only the exceptions listed in Gotchas. Every other instance gets rewritten with #20. Do not swap one tell for another: an em dash removed must not come back as a colon or a parenthesis.
 
 **Source consistency check (always run this):**
 - Does every conclusion follow logically from evidence actually presented in the text?
@@ -147,7 +154,9 @@ If any check fails, fix before delivering. For consistency failures: scale the c
 - **Don't over-humanize** — removing all structure makes text hard to follow. The goal is natural, not chaotic.
 - **Register matters** — a formal report humanized too aggressively becomes unprofessional. Match the output register to the context.
 - **Contractions in Spanish** — Spanish doesn't contract the same way English does. Humanization in Spanish relies more on verb choice, word order, and personal voice than on contractions.
-- **Em dash in Spanish** — the only legitimate use in Spanish is dialogue attribution (attributing spoken words to a speaker). Em dashes as parenthetical asides in analytical, academic, or professional prose are an AI pattern in both languages. Use parentheses or rewrite the sentence instead. When in doubt, replace with parentheses.
+- **Em dash in Spanish** — the only legitimate use in Spanish is dialogue attribution (attributing spoken words to a speaker). Em dashes as parenthetical asides in analytical, academic, or professional prose are an AI pattern in both languages. Rewrite the sentence with commas or split it in two. Do not fall back on parentheses or colons.
+- **Legitimate colons and parentheses (the only exceptions)** — keep them where they are notation, not style: APA in-text citations and reference lists `(Autor, 2024)`, an acronym defined on first use, code, formulas, function signatures `registrar(id)`, times and ratios `10:30`, `3:1`, a format that a form or template explicitly requires, and a colon that introduces a literal quotation or dialogue. Everything else is prose and follows #20.
+- **Structured documents** — in guides, answer sheets, or reports with fields, turn `**Label:**` lines into real headings or table cells instead of bold labels with colons. Headings and table columns carry the label; the prose underneath stays colon-free.
 - **Specificity beats authenticity tricks** — one concrete specific detail (a real number, a named place, a sensory observation) is worth ten stylistic tweaks.
 - **Don't invent facts** — if the user's text makes a claim, humanize the *language* around it, not the *content*.
 - **Stay accountable to sources** — human writers only draw conclusions their evidence supports. A conclusion that outreaches its evidence is a clear AI tell, even if the prose itself sounds natural. Scale conclusions down to match the evidence; never add new unsupported claims to justify an overreaching conclusion.
@@ -165,7 +174,10 @@ If any check fails, fix before delivering. For consistency failures: scale the c
 | Starting with "Look," or "Here's the thing:" | These have become their own AI clichés |
 | Removing all hedging | Some contexts require epistemic humility; hedge only when necessary |
 | Translating idioms literally between languages | Each language has its own natural informal markers |
-| Em dash as an inline qualifier or descriptor (`Term — Label: Value`, e.g. `Force Name — Intensity: Low`) | Real humans almost never write this way outside of published books. It reads as AI-generated structure. Use a separate sentence, parentheses, or a colon instead. |
+| Em dash as an inline qualifier or descriptor (`Term — Label: Value`, e.g. `Force Name — Intensity: Low`) | Real humans almost never write this way outside of published books. It reads as AI-generated structure. Use a separate sentence or a table cell instead. |
+| Replacing an em dash with parentheses or a colon | It trades one AI tell for another. Rewrite the sentence so it needs neither |
+| `Ventaja: X. Costo: Y.` or `Supuesto: X. Duda: Y.` inside a paragraph | Label-colon prose reads like a filled template. Write the full sentence, *La ventaja es que X. El costo es que Y.* |
+| `(por ejemplo, X)` or `(es decir, Y)` mid-sentence | Integrate it with commas, *como X*, or a new sentence |
 
 ---
 

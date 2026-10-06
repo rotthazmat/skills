@@ -126,6 +126,33 @@
         "Sentence lengths vary — not all the same length",
         "Takes a specific point of view or uses a concrete detail rather than a generic observation applicable to anyone"
       ]
+    },
+    {
+      "id": "es-colons-parentheses",
+      "description": "Spanish answer-sheet prose full of label-colons and parenthetical asides",
+      "input": "Humaniza esta respuesta de una actividad: 'Decisión: usamos un monolito modular (tres módulos lógicos). Ventaja: si cambia la regla de disponibilidad, solo se toca el gestor (no cada pantalla). Costo: todos comparten proceso (una falla grave afecta todo). Supuesto: el personal marca los agotados al inicio del turno (lo confirma el administrador).'",
+      "expected_behavior": "Rewrite every label-colon fragment (Decisión:, Ventaja:, Costo:, Supuesto:) as a full sentence with a subject. Integrate each parenthetical aside into the sentence with commas or a new sentence, or cut it if redundant. Keep all technical facts. Do not replace removed colons or parentheses with em dashes.",
+      "assertions": [
+        "No colon remains in the prose",
+        "No parenthesis remains in the prose",
+        "No em dash introduced as a replacement",
+        "Ventaja and Costo become full sentences such as 'La ventaja es que...' and 'El costo es que...'",
+        "All four facts survive, including the monolito modular, the change limited to the gestor, the shared process risk, and the supuesto confirmed by the administrador",
+        "Sentences vary in length instead of repeating the same label-sentence shape"
+      ]
+    },
+    {
+      "id": "es-legit-parentheses-kept",
+      "description": "Spanish academic paragraph where colons and parentheses are legitimate notation and must survive",
+      "input": "Humaniza este párrafo sin romper el formato académico: 'Según la guía SWEBOK (Washizaki, 2026), el diseño se divide en alto nivel y detalle. El ocultamiento de información (Parnas, 1972) es un criterio clásico para modularizar. Además, cabe destacar que la Interfaz de Programación de Aplicaciones (API) debe documentar cada operación, por ejemplo registrar(idPedido).'",
+      "expected_behavior": "Keep APA citations in parentheses, the acronym definition on first use, and the function signature. Remove AI filler like 'Además, cabe destacar que'. Do not strip legitimate notation just because it uses parentheses.",
+      "assertions": [
+        "Keeps '(Washizaki, 2026)' and '(Parnas, 1972)' as APA citations",
+        "Keeps the acronym definition '(API)' on first use",
+        "Keeps the function signature 'registrar(idPedido)' intact",
+        "Removes 'Además, cabe destacar que' or equivalent filler",
+        "Introduces no new parenthetical asides or colons outside those exceptions"
+      ]
     }
   ]
 }
