@@ -38,3 +38,6 @@ build/
 # 3rd party skills
 /caveman/
 /fastapi-templates/
+
+# AI generated content
+/synced/
