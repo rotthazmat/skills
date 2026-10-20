@@ -242,7 +242,8 @@ Same rule for PR descriptions, docs, code comments, and emails written for someo
 
 | User says | Effect | Reply |
 |---|---|---|
-| `/minimal-talk` | On at lite | `Minimal talk on (lite).` |
+| (new session, nothing said) | On at ultra by default | No confirmation — answer in ultra |
+| `/minimal-talk` | Ultra (or back on after off) | `Ultra.` |
 | `/minimal-talk ultra` | On at ultra, or switch to ultra | `Ultra.` |
 | "go full" / "more compressed" | Next level up | `Full.` |
 | "too short" / "less compressed" | Next level down | `Lite.` |

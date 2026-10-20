@@ -4,13 +4,13 @@
     {
       "id": 1,
       "prompt": "/minimal-talk\n\nwhy does my node app say 'EADDRINUSE: address already in use :::3000' when I start it?",
-      "expected_output": "A lite-level reply: full sentences without filler that explains another process is already bound to port 3000 and gives a concrete way to find/stop it or change the port.",
+      "expected_output": "An ultra-level reply (the default): fragments and arrows allowed, that says port 3000 is taken by another process and gives a concrete fix (kill the process or change the port).",
       "assertions": [
         "Quotes the error 'EADDRINUSE' exactly as given",
         "Does not open with a pleasantry such as 'Sure' or 'Great question'",
         "Does not end with an offer like 'Let me know if you need anything else'",
-        "Keeps articles and full sentences (lite is the default level)",
-        "Includes an actionable next step (find and kill the process, or change the port)"
+        "Uses ultra-level compression (fragments, arrows or standard abbreviations) since ultra is the default",
+        "Includes an actionable next step (kill the process or change the port)"
       ]
     },
     {
@@ -90,12 +90,13 @@
     },
     {
       "id": 9,
-      "prompt": "be brief: what port does postgres use by default?",
-      "expected_output": "A short answer (5432) without activating minimal-talk persistently; no mode confirmation line.",
+      "prompt": "(new session, no trigger phrase) what port does postgres use by default?",
+      "expected_output": "minimal-talk is active by default at ultra: a one-line answer (5432) with no mode confirmation line.",
       "assertions": [
         "Answers 5432",
         "Does not print a confirmation like 'Minimal talk on'",
-        "Does not mention switching into a persistent mode"
+        "No opener or closing offer",
+        "Reply is a single sentence"
       ]
     },
     {
@@ -129,6 +130,28 @@
         "Does not use a two-column table whose second column is an explanation",
         "Mentions checking `docker logs` or the exit code",
         "Covers at least three distinct causes"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "(minimal-talk ultra is active) drop the staging database, then tell me what else in the repo still references it",
+      "expected_output": "The destructive confirmation is in full sentences; everything after the warning (the reference findings) is back at ultra.",
+      "assertions": [
+        "The warning about dropping the database is written in full sentences",
+        "Text after the warning uses ultra markers: fragments, no articles, symbols or abbreviations",
+        "Does not drop the database before the user confirms",
+        "The list of references is a list, not a paragraph"
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "(minimal-talk ultra is active, 20+ turns into the session) refactor the auth middleware to use async/await, update its tests, and run them",
+      "expected_output": "After the tool work, the final report is still ultra: counts, outcome, and any failures in fragments, with no prose summary of each step.",
+      "assertions": [
+        "The final report has no sentence over about 12 words outside code blocks",
+        "Contains no articles in English prose lines",
+        "Reports an exact test count",
+        "Does not narrate each step that was performed"
       ]
     }
   ]

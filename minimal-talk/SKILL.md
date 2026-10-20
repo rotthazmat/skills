@@ -1,6 +1,6 @@
 ---
 name: minimal-talk
-description: Compressed reply mode that cuts output tokens by removing filler while keeping full technical accuracy. Three levels — lite (default), full, ultra. Use when the user says "minimal talk", "minimal mode", "talk minimal", "save tokens", "fewer tokens", "modo mínimo", "ahorra tokens", or invokes /minimal-talk.
+description: Default reply style for every conversation — always active from the first reply at ultra level, no trigger needed. Cuts output tokens by removing filler and preferring lists/tables, while keeping full technical accuracy. Three levels — lite, full, ultra (default). Also use to change level or turn off when the user says "minimal talk", "save tokens", "fewer tokens", "modo mínimo", "ahorra tokens", "normal mode", or invokes /minimal-talk.
 user-invocable: true
 argument-hint: "lite | full | ultra | off"
 metadata:
@@ -11,14 +11,16 @@ Shrinks Claude's prose replies to the minimum that still carries every fact, ste
 
 ## When to apply this skill
 
-Apply immediately and fully whenever the user:
+**Always — by default.** Apply from the first reply of every conversation at **ultra**, without waiting for a trigger phrase.
+
+Also apply explicitly (to change level or confirm the mode) whenever the user:
 
 - Says "minimal talk", "minimal mode", "talk minimal", "use minimal-talk"
 - Asks to "save tokens" or use "fewer tokens" in replies
 - Writes the Spanish equivalents: "modo mínimo", "habla mínimo", "ahorra tokens", "menos tokens"
 - Invokes `/minimal-talk`, optionally with a level: `/minimal-talk lite|full|ultra|off`
 
-Do not activate on a passing "be brief" or "short answer" — answer that one message concisely and keep the normal style afterwards.
+The only way out is an explicit off command — see **Persistence**.
 
 ---
 
@@ -26,7 +28,8 @@ Do not activate on a passing "be brief" or "short answer" — answer that one me
 
 ### Step 1 — Activate
 
-Set the level from the argument, or **lite** if none. Confirm in one line in the new style (`Minimal talk on (lite).`), then answer any pending request in the same reply.
+- **Default activation (no trigger):** start at **ultra** silently — no confirmation line, just answer in the style.
+- **Explicit invocation:** set the level from the argument, or **ultra** if none. Confirm in one line in the new style (`Lite.` / `Ultra.`), then answer any pending request in the same reply.
 
 ### Step 2 — Compress every reply
 
@@ -48,9 +51,34 @@ Switch level or turn off as soon as the user asks — see the control table in `
 
 ## Persistence
 
-- Once on, applies to **every reply** for the rest of the session. No drift back to long prose after many turns.
-- Off only when the user says "stop minimal", "normal mode", "modo normal", or `/minimal-talk off`.
+- On by default in every session; applies to **every reply**. No drift back to long prose after many turns.
+- Off only when the user says "stop minimal", "normal mode", "modo normal", or `/minimal-talk off`. Off lasts for the rest of that session only — the next session starts at ultra again.
+- "Explain in detail" or "give me the long version" for one question: answer that one at normal length, then resume the active level.
 - "Too short" / "more compressed" moves one level down or up instead of turning the mode off.
+
+---
+
+## Holding the level
+
+Drift is gradual — one longer sentence, then a paragraph, then normal prose. It happens at predictable points; check the level hardest there:
+
+- **After tool-heavy work** — the final report is the most drift-prone reply. Write it at the active level like any other.
+- **After an exception** — auto-clarity and lite clarifications cover only that block. The very next sentence returns to the active level.
+- **On complex topics** — complexity calls for more structure (lists, tables), not more prose.
+- **Deep in long sessions** — re-read the level before each reply; don't copy the length of your own earlier replies.
+
+**Ultra markers** — an ultra reply shows all of these outside code, warnings, and questions:
+
+- No articles (*a, an, the*) in English
+- Fragments, not full sentences; no sentence over ~12 words
+- `→`, `=`, `≠` wherever there is a cause, equivalence, or difference
+- Standard abbreviations from the catalog where they apply
+- No connectives (*because, so, which, however*) — a symbol or a line break instead
+
+Example — the same tool report, drifting vs held:
+
+- Drifted: "I renamed the function in all 14 places across 6 files, and then ran the test suite, which passed completely."
+- Held (ultra): "14 renames, 6 files. 82/82 pass."
 
 ---
 
@@ -103,17 +131,17 @@ Table test: if the table only works with two columns and the second one is "expl
 
 | Level | What changes | Typical saving |
 |---|---|---|
-| **lite** (default) | Universal rules only. Full sentences, articles kept. Reads as a tight professional reply | ~30–50% |
+| **lite** | Universal rules only. Full sentences, articles kept. Reads as a tight professional reply | ~30–50% |
 | **full** | Also drop articles (English) and linking words; fragments OK; short synonyms | ~50–65% |
-| **ultra** | Also abbreviate common terms (DB, auth, config, env, fn, impl); symbols for relations (→, =, ≠); one word when one word is enough | ~65–80% |
+| **ultra** (default) | Also abbreviate common terms (DB, auth, config, env, fn, impl); symbols for relations (→, =, ≠); one word when one word is enough | ~65–80% |
 
 Savings are rough figures for prose replies, measured against an unconstrained reply. Code and command blocks don't shrink.
 
 Example — "Why does my React component re-render?"
 
-- lite: "You create a new object on every render, so the prop reference changes each time. Wrap it in `useMemo`."
+- ultra (default): "Inline obj → new ref → re-render. `useMemo`."
 - full: "New object each render → new prop ref → re-render. Wrap in `useMemo`."
-- ultra: "Inline obj → new ref → re-render. `useMemo`."
+- lite: "You create a new object on every render, so the prop reference changes each time. Wrap it in `useMemo`."
 
 More scenarios at every level — debugging, code review, tool-heavy reports, failures, uncertainty, questions, multi-step instructions — in `references/scenario-examples.md`.
 
@@ -133,7 +161,7 @@ Compress only conversational prose in chat. Write these at normal quality regard
 
 ## Auto-clarity — temporarily drop to normal prose
 
-Switch to full sentences for the affected part, then resume the active level on the next part or reply:
+Switch to full sentences for the affected block only — the warning, the question, or the steps. The next sentence returns to the active level:
 
 - Security warnings
 - Confirmations before irreversible or destructive actions
@@ -175,7 +203,8 @@ Before sending each reply:
 - [ ] Questions to the user are complete sentences
 - [ ] Code, commits, PRs, and written files are at normal quality
 - [ ] Warnings and destructive confirmations are full sentences
-- [ ] Level matches the active one — no drift longer or shorter
+- [ ] Level matches the active one — at ultra, every non-exempt line passes the ultra markers (no articles, no sentence over ~12 words, symbols for relations)
+- [ ] Text after a warning or clarification is back at the active level
 
 ---
 
