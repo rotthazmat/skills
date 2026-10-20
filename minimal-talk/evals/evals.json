@@ -1,0 +1,135 @@
+{
+  "skill_name": "minimal-talk",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/minimal-talk\n\nwhy does my node app say 'EADDRINUSE: address already in use :::3000' when I start it?",
+      "expected_output": "A lite-level reply: full sentences without filler that explains another process is already bound to port 3000 and gives a concrete way to find/stop it or change the port.",
+      "assertions": [
+        "Quotes the error 'EADDRINUSE' exactly as given",
+        "Does not open with a pleasantry such as 'Sure' or 'Great question'",
+        "Does not end with an offer like 'Let me know if you need anything else'",
+        "Keeps articles and full sentences (lite is the default level)",
+        "Includes an actionable next step (find and kill the process, or change the port)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "minimal talk ultra please. Then fix the typo in utils.js where `retrun` should be `return` and commit it.",
+      "expected_output": "Chat prose is ultra-compressed, but the commit message is written as a normal, well-formed commit message.",
+      "assertions": [
+        "Chat replies use ultra-level compression (fragments, abbreviations or arrows allowed)",
+        "The commit message is a normal full-sentence message, not compressed",
+        "Does not narrate each tool call with sentences like 'Now I will open the file'",
+        "Reports whether the commit succeeded"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "(minimal-talk full is active) delete the old migrations folder and drop the staging database",
+      "expected_output": "Switches to clear full-sentence prose to confirm the irreversible actions before running them, then resumes full-level compression.",
+      "assertions": [
+        "Asks for confirmation before deleting the folder or dropping the database",
+        "The warning is written in complete sentences, not fragments",
+        "States that the actions cannot be undone",
+        "Does not perform the destructive actions before the user confirms"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "modo mínimo full. ¿Por qué mi componente de React se vuelve a renderizar cada vez que escribo en el input del padre?",
+      "expected_output": "A Spanish full-level reply that explains the parent re-render passes new props or references to the child and suggests React.memo / useMemo / useCallback, keeping Spanish articles.",
+      "assertions": [
+        "Replies in Spanish",
+        "Keeps Spanish articles (el, la, los, las) instead of dropping them",
+        "Contains no filler connectors such as 'Asimismo', 'Cabe destacar' or 'Es importante mencionar'",
+        "Names a concrete fix (React.memo, useMemo or useCallback)",
+        "Keeps technical terms like 'props' or 'render' in their usual form"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "(minimal-talk ultra is active) rename getUser to fetchUser across the repo and run the tests",
+      "expected_output": "After doing the work, a short ultra report with the exact number of renames and an exact test count; if any test fails, the failure and its location are reported, not hidden.",
+      "assertions": [
+        "Reports an exact count of tests passed and failed, not 'mostly pass'",
+        "If any test fails, names the failing file or test",
+        "Does not repeat the diff or list every changed line in prose",
+        "Does not narrate each step before running tools"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "(minimal-talk ultra is active) I need a new endpoint for exporting invoices. Go ahead.",
+      "expected_output": "Before implementing, asks the needed clarifying question(s) (format, auth, filters) as complete sentences, not clipped fragments.",
+      "assertions": [
+        "Asks at least one clarifying question before writing code",
+        "Each question is a complete sentence, not fragments like 'CSV? Auth?'",
+        "Does not open with a pleasantry"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "(minimal-talk ultra is active; previous reply was 'Stale closure → old count. Functional update.') what do you mean?",
+      "expected_output": "Re-explains the stale closure issue at lite level in full sentences with the concrete fix, and does not turn the mode off.",
+      "assertions": [
+        "The explanation uses full sentences (lite level) rather than ultra fragments",
+        "Shows the functional update form, e.g. setCount(c => c + 1)",
+        "Does not announce that minimal-talk is turned off"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "(minimal-talk lite is active) ok stop minimal, normal mode please. Can you explain what a JWT is?",
+      "expected_output": "Turns the mode off and answers the JWT question in normal, unconstrained style.",
+      "assertions": [
+        "Acknowledges the mode is off, in at most one short line",
+        "The JWT explanation is in normal prose, not compressed fragments",
+        "Explains the header, payload, and signature parts of a JWT"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "be brief: what port does postgres use by default?",
+      "expected_output": "A short answer (5432) without activating minimal-talk persistently; no mode confirmation line.",
+      "assertions": [
+        "Answers 5432",
+        "Does not print a confirmation like 'Minimal talk on'",
+        "Does not mention switching into a persistent mode"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "(minimal-talk lite is active) what's the difference between SQL and NoSQL databases?",
+      "expected_output": "A comparison table (one column per database type, one row per attribute such as schema, scaling, consistency, typical use) with no intro sentence and at most one closing line.",
+      "assertions": [
+        "The comparison is presented as a Markdown table, not a paragraph",
+        "The table has one column per option (SQL, NoSQL) and rows for attributes",
+        "No intro sentence such as 'Here is a comparison' before the table",
+        "Covers at least schema and scaling differences",
+        "Any text after the table is a single short line or absent"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "(minimal-talk full is active) what's the default port for redis?",
+      "expected_output": "A single short line answering 6379, with no table or list.",
+      "assertions": [
+        "Answers 6379",
+        "Does not wrap the single fact in a table or list",
+        "Reply is one line"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "(minimal-talk lite is active) what are common reasons a docker container exits immediately after starting?",
+      "expected_output": "A bulleted list of independent causes (main process ends, crash on startup, missing env/config, wrong CMD/ENTRYPOINT) each with a short note and a diagnostic hint like `docker logs`; no two-column cause/explanation table.",
+      "assertions": [
+        "Causes are presented as a bulleted list, not a table",
+        "Does not use a two-column table whose second column is an explanation",
+        "Mentions checking `docker logs` or the exit code",
+        "Covers at least three distinct causes"
+      ]
+    }
+  ]
+}
